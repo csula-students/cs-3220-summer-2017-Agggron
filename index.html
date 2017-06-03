@@ -11,6 +11,16 @@
 		background-color: #009688;
 		font-size: 16px;
 		padding: 0.5em 1em;
+
+		/*
+		background-color: #4CAF50; 
+	    border: none;
+	    color: white;
+	    padding: 0.5em 1em;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 16px;*/
 	}
 
 	table {
@@ -28,17 +38,20 @@
 	</style>
 
 <body>
-
+	<h1>Put in Your Recipes!</h1>
 	<form action="">
 	<label for="name">Name</label>
 	<input type="text" id="name">
+	<br>
 	<!-- add more necessary information you need for creating additional recipes -->
-
-
-	<h1>Hello World!</h1>
-
-	<button>A button</button>
-
+	<label for="name">Image</label>
+	<input type="text" id="image">
+	<br>
+	<label for="name">Ingredient</label>
+	<input type="text" id="ingredient"><br>
+	
+	<button>Input Information Now!</button><br>
+	
 	<table>
 		<thead>
 			<tr>
@@ -51,17 +64,23 @@
 			<tr>
 				<td>Chilean Sea Bass</td>
 				<td><img src = "http://www.omahasteaks.com/gifs/990x594/sf107.jpg" alt="" height="200" width="400"></td>
-				<td>Freshly caught sea bass with a honey glaze.</td>
+				<td><ul><li>Sea Bass
+					<li>Honey
+					</ul></td>
 			</tr>
 			<tr>
 				<td>Pork Belly Wrapped Cod</td>
 				<td><img src = "https://static1.squarespace.com/static/554b92d0e4b086dd909eafa5/t/55842719e4b06717f4c4de7f/1434724131473/Smoked+Pork+Belly+Wrapped+Cod%2C+Shaved+Asparagus%2C+Clams+%26+Saffron+Broth+%282%29.JPG" alt="" height="200" width="400"></td>
-				<td>Cod enveloped with smoked pork belly, on top of a refreshing asparagus and clam bed.</td>
+				<td><ul><li>Smoked Pork Belly
+					<li>Cod
+					<li>Asparagus
+					<li>Mussels
+					</ul></td>
 			</tr>
 			<tr>
 				<td>Sashimi</td>
 				<td><img src="https://www.bbcgoodfood.com/sites/default/files/glossary/sashimi-resized.jpg" alt="" height="200" width="400"></td>
-				<td>Lol it's just sushi</td>
+				<td><ul><li>Lol it's just sushi</ul></td>
 		</tbody>
 	</table>
 
