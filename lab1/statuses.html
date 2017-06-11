@@ -2,8 +2,61 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Statuses Page</title>
+	<title>Your Tab</title>
+	<link rel="stylesheet" href="app.css">
+	
+	<link href="https://fonts.googleapis.com/css?family=Ceviche+One|Cinzel:900" rel="stylesheet"> 
 </head>
 <body>
+	<header>
+		<img src="http://orig15.deviantart.net/2aca/f/2013/128/6/c/red_dragon_inn_logo_by_kennon9-d64m29f.jpg" width=20% height=250%> 
+
+		<h1>THE RED DRAGON INN</h1>
+
+		<nav>
+			<a href="index.html" class="navigation">Main Menu</a>
+			<a href="menu.html" class="navigation">Buy Items</a>
+			<a href="statuses.html" class="navigation">Your Tab</a>
+		</nav>
+		
+	</header>
+
+	<main>
+		<h2>Purchasing History</h2>
+
+		<table class="td_status">
+			<tr class="td_status">
+				<td class="td_status"><h3>Created</h3></td>
+				<td class="td_status"><h3>Beverage</h3></td>
+				<td class="td_status"><h3>Customer</h3></td>
+				<td class="td_status"><h3>Status</h3></td>
+			</tr>
+			<tr class="td_status">
+				<td class="td_status">2017-06-11 13:52</td>
+				<td class="td_status">DRAGON BREATH ALE<br>
+					<img src="../potion2.png" width=100px height=100px></td>
+				<td class="td_status">Fiona the Volatile</td>
+				<td class="td_status">In Progress</td>
+			</tr>
+			<tr class="td_status">
+				<td class="td_status">2017-06-10 00:42</td>
+				<td class="td_status">STEALTH SWILL<br>
+					<img src="../potion4.png" width=100px height=100px></td>
+				<td class="td_status">Gerki the Sneak</td>
+				<td class="td_status pickup">Ready for Pickup!</td>
+			</tr>
+			<tr class="td_status">
+				<td class="td_status">2017-06-06 06:06</td>
+				<td class="td_status">UNHOLY WATER<br>
+					<img src="../potion1.png" width=100px height=100px></td>
+				<td class="td_status">Zot the Wizard</td>
+				<td class="td_status delivered">Delivered:<br>
+					2017-06-11 13:56</td>
+			</tr>
+		</table>
+	</main>
+	<footer>
+		© 2017 Aaron Tang, Inc., All Rights Reserved.
+	</footer>
 </body>
 </html>
