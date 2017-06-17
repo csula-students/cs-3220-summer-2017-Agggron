@@ -11,11 +11,7 @@ header {
 	align-items: center;
 	padding: 0.5em 0.25em 0.5em 0.25em;
 }
-h1 {
-	font-size: 36px;
-	font-family: 'Cinzel', serif;
-	margin: 0;
-}
+
 .navigation {
 	color: red;
 	font-size: 28px;
@@ -28,7 +24,6 @@ h1 {
 .navigation:hover {
 	color: blue;
 }
-
 main {
 	font-family: 'Calibri';
 	font-size: 20px;
@@ -40,10 +35,32 @@ footer {
 	padding: 1em;
 	color: white;
 }
+h1 {
+	font-size: 36px;
+	font-family: 'Cinzel', serif;
+	margin: 0;
+}
+h2 {
+	font-size: 30px;
+	text-align: center;
+}
 h3 {
 	font-size: 24px;
 	font-style: bold;
 	text-transform: uppercase;
+}
+h4 {
+	font-size: 20px;
+	font-style: bold;
+	text-transform: uppercase;
+	margin: 0px;
+}
+h5 {
+	font-size: 16px;
+	font-style: bold;
+}
+.quote {
+	font-style: italic;
 }
 table {
 	border-collapse: collapse;
@@ -64,12 +81,23 @@ td {
 	border-left: 0px;
 	border-right: 0px;
 }
+.td_order {
+	max-width: 40%;
+	border-top: 3px solid white;
+	border-bottom: 3px solid white;
+	border-left: 0px;
+	border-right: 0px;
+}
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
 .delivered, .pickup {
 	font-style: italic;
 }
 button {
 	color: red;
-	font-size: 18px;
+	font-size: 24px;
 	font-family: 'Ceviche One', cursive;
 	text-decoration: none;
 	background-color: #ccc;
@@ -79,10 +107,18 @@ button {
 button:hover {
 	color: blue;
 }
-.order {
+.link {
 	text-decoration: none;
 	color: red;
 }
-.order:hover {
+.link:hover {
 	color: blue;
+}
+.small {
+	width: 75px;
+	height: 75px;
+}
+.home {
+	border: none;
+	max-width: 80%;
 }
