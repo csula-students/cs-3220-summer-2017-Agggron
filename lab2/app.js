@@ -42,39 +42,42 @@ class Cart {
         this.store = store;
         this.items = this.store.cartItems;
         this.init();
+        this.order_placed = false;
     }
 
     init () {
         // Render a list of items under root element
         this.render();
         // TODO: attach remove cart items to rendered HTML
-        
-        // Remove buttons located in removeItem(item) function. Creation of click EventListener calling removeItem(item) is found in RemoveButton class.
+        // All EventListeners are found in render() --> removeButton, removeAllButton, confirmOrderButton. 
     }
 
     destroy () {
         // TODO: remove all the events attached from init
-        // Destroying of click EventListener is found in RemoveButton class.
+        let removeButtons = document.querySelectorAll('.remove_button');
+        for (var i = 0; i < removeButtons.length; i++) {
+            let btn = removeButtons[i];
+            btn.removeEventListener('click', () => {
+                let item = this.items[parseInt(btn.dataset.index)];
+                this.removeItem(item);
+            });
+        }
+
+        let removeAllButton = document.querySelector('.remove_all_button');
+        removeAllButton.removeEventListener('click', () => {
+            this.removeAllItems();
+        });
+
+        let confirmOrderButton = document.querySelector('.confirm_order_button');
+        confirmOrderButton.removeEventListener('click', () => {
+            this.placeOrder();
+        });
     }
 
     // remove an item from shopping cart
     removeItem (item) {
         // TODO: logic to remove an item from cart
-        /* Works with RemoveButton class
-        if (this.items != null) {
-            var updated_list = [];
-            for (var i = 0; i < this.items.length; i++) {
-                if (this.items[i][0] != item) {
-                    updated_list.push(this.items[i]);
-                }
-            }
-            this.store.cartItems = updated_list;
-            this.items = updated_list;
-        }
-        // call render method when the item is removed to update view
-        this.render();*/
-    
-        /* Almost entirely similar, works with Eric's help from Slack...*/
+        /* With Eric's help from Slack...*/
         if (this.items != null) {
             var updated_list = [];
             var to_compare = item[0];
@@ -97,7 +100,20 @@ class Cart {
 
     placeOrder () {
         // add item to statuses in store as status "in progress"
-        console.log("Order placed!");
+        if (this.items !== null) {
+            var queueItems = [];
+            if (this.store.queue !== null) {
+                for (var i = 0; i < this.store.queue.length; i++) {
+                    queueItems.push(this.store.queue[i]);
+                }
+            }
+            for (var i = 0; i < this.items.length; i++) {
+                queueItems.push([this.items[i][0], this.items[i][1], Number(this.items[i][2])]);
+            }
+            this.store.queue = queueItems;
+            this.order_placed = true;
+            this.removeAllItems();
+        }
     }
 
     // render a list of item under root element
@@ -107,11 +123,20 @@ class Cart {
         tbody.innerHTML = ``;
         if (this.items === null) {
             this.items = [];
+        } else if ((this.items.length == 0) && (this.order_placed)) {
+            tbody.innerHTML += 
+            `<tr class="cart-table">
+                <td class="cart-table">
+                    <p class="title">Order Placed Successfully!</p>
+                </td>
+            </tr>`; 
+            this.order_placed = false;
+            return;
         } else if (this.items.length == 0) {
             tbody.innerHTML +=
             `<tr class="cart-table">
                 <td class="cart-table">
-                    <p>Nothing! Go on, buy some liquor!</p>
+                    <p>Nothing! Go on, buy some more liquor!</p>
                     <img src="../images/bartender.jpg" width=150px height=120px>
                 </td>
             </tr>`; 
@@ -155,13 +180,6 @@ class Cart {
                 this.removeItem(item);
             });
         }
-        /* Eric's help from Slack that works, but I'm currently using my own implementation...
-        removeButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                let item = this.items[parseInt(btn.dataset.index)];
-                this.removeItem(item);
-            });
-        });*/
 
         let removeAllButton = document.querySelector('.remove_all_button');
         removeAllButton.addEventListener('click', () => {
@@ -171,51 +189,9 @@ class Cart {
         let confirmOrderButton = document.querySelector('.confirm_order_button');
         confirmOrderButton.addEventListener('click', () => {
             this.placeOrder();
-        }) 
-
+        });
     }
 }    
-
-class RemoveButton {
-    constructor(root, store, cart) {
-            this.root = root;
-            this.store = store;
-            this.cart = cart;
-            this.onClick = () => this.cart.removeItem(this.root.dataset.name);
-            this.init();
-        }
-
-        init () {
-            this.root.addEventListener("click", this.onClick);
-        }
-
-        destroy () {
-            this.root.removeEventListener("click", this.onClick);
-        }
-
-}
-
-class ClearStatusButton {
-    constructor(root, store, cart) {
-            this.root = root;
-            this.store = store;
-            this.cart = cart;
-            this.onClick = () => this.clearStatuses();
-            this.init();
-        }
-
-        init () {
-            this.root.addEventListener("click", this.onClick);
-        }
-
-        destroy () {
-            this.root.removeEventListener("click", this.onClick);
-        }
-
-        clearStatuses() {
-            let status = document.querySelector(".status_table");  
-        }
-}
 
 class CheckoutButton {
     constructor(root, store) {
@@ -260,26 +236,92 @@ class StatusTable {
     constructor(root, store) {
         this.root = root;
         this.store = store;
-        init();
+        this.init();
     }
 
     init () {
         // attach click event listener to table header row on each column
-        render();
+        this.render();
+        // not doing sorting as of now
     }
 
     destroy () {
         // remove all the events attached from init
+        let clearHistoryButton = document.querySelector('.clear_history_button');
+        clearHistoryButton.removeEventListener('click', () => {
+            this.clearHistory();
+        });
     }
 
     sort (columnName) {
         // after sorting the array of statuses, re render item to update view
-        render();
+        this.render();
+    }
+
+    clearHistory() {
+        this.store.queue = [];
+        this.render();
     }
 
     // render rows of items under table using root.innerHTML
     render () {
+        let tbody = this.root.querySelector('tbody');
+        // using innerHTML to render a list of table row item under tbody
+        tbody.innerHTML = ``;
+        if (this.store.queue === null) {
+            this.store.queue = [];
+        } 
+        if (this.store.queue.length == 0) {
+            tbody.innerHTML +=
+            `<tr class="order_status_table">
+                <td class="order_status_table" >
+                    <p>You have purchased nothing! <br>
+                    Actually buy something <a href="menu.html" class="link">here</a>.</p>
+                    <img src="../images/bartender.jpg" width=150px height=120px>
+                </td>
+            </tr>`; 
+            return;
+        }
 
+        tbody.innerHTML += 
+            `<tr class="order_status_table">
+                <td class="order_status_table title">Beverage</td>
+                <td class="order_status_table title">Quantity</td>
+                <td class="order_status_table title">Status</td>
+            </tr>`;
+
+        for (var i = 0; i < this.store.queue.length; i++) {
+            // for each item in local storage's QUEUE, create a row with a cell for the item name and image, a cell for quantity, and a cell for status (In Progress for now).
+            var item_name = this.store.queue[i][0];
+            var image_name = this.store.queue[i][1];
+            var item_quantity = Number(this.store.queue[i][2]);
+
+            tbody.innerHTML +=
+                `<tr class="order_status_table">
+                    <td class="order_status_table">
+                        <h4>${item_name}</h4>
+                        <img src=${image_name} class="small">
+                    </td>
+                    <td class="order_status_table">
+                        <h4>${item_quantity}</h4>
+                    </td>
+                    <td class="order_status_table">
+                        <h4>In Progress!</h4>
+                    </td>
+                </tr>`;
+        }
+
+        tbody.innerHTML += 
+            `<tr class="cart-table">
+                <td class="cart-table" colspan="3">
+                    <button class="clear_history_button">Clear All History!</button>
+                </td>
+            </tr>`;
+
+        let clearHistoryButton = document.querySelector('.clear_history_button');
+        clearHistoryButton.addEventListener('click', () => {
+            this.clearHistory();
+        });
     }
 }
 
@@ -288,15 +330,16 @@ class StatusTable {
 // the end of document
 document.addEventListener('DOMContentLoaded', () => {
     // use querySelector to find the table element (preferably by id selector)
-    // let statusTable = document.querySelector('');
+    let statusTable = document.querySelector('.order_status_table');
     // // use querySelector to find the cart element (preferably by id selector)
     let cart = document.querySelector('.cart-table');
     let checkoutButtons = document.querySelectorAll('.checkout-button');
 
     let store = new Store(window.localStorage);
-    // if (table) {
-    //     new StatusTable(table, store);
-    // }
+
+    if (statusTable) {
+        new StatusTable(statusTable, store);
+    }
     if (cart) {
         new Cart(cart, store);
     }

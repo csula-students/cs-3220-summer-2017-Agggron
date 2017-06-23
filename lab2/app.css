@@ -43,11 +43,12 @@ h1 {
 h2 {
 	font-size: 30px;
 	text-align: center;
+	text-transform: uppercase;
 }
 h3 {
 	font-size: 24px;
 	font-style: bold;
-	text-transform: uppercase;
+	text-align: center;
 }
 h4 {
 	font-size: 20px;
@@ -101,6 +102,15 @@ td {
 	border-right: 0px;
 }
 .order_status_table.title {
+	font-size: 24px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.order_status_table.text {
+	font-size: 24px;
+	font-weight: bold;
+}
+p.title {
 	font-size: 24px;
 	font-weight: bold;
 	text-transform: uppercase;
