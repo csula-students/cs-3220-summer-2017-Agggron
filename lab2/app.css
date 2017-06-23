@@ -81,12 +81,29 @@ td {
 	border-left: 0px;
 	border-right: 0px;
 }
-.td_order {
-	max-width: 40%;
+.cart-table {
+	max-width: 50%;
 	border-top: 3px solid white;
 	border-bottom: 3px solid white;
 	border-left: 0px;
 	border-right: 0px;
+}
+.cart-table.title {
+	font-size: 28px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.order_status_table {
+	max-width: 60%;
+	border-top: 3px solid white;
+	border-bottom: 3px solid white;
+	border-left: 0px;
+	border-right: 0px;
+}
+.order_status_table.title {
+	font-size: 24px;
+	font-weight: bold;
+	text-transform: uppercase;
 }
 .center {
 	margin-left: auto;
