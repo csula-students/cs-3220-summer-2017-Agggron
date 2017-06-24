@@ -274,7 +274,6 @@ class StatusTable {
     sort (columnName) {
         // after sorting the array of statuses, re render item to update view
         if (columnName === "name_ascending") {
-            //debugger;
             var final_sorted_queue = [];
             for (var i = 0; i < this.store.queue.length; i++) {
                 var current_item = this.store.queue[i];
@@ -306,7 +305,109 @@ class StatusTable {
                     final_sorted_queue = newly_sorted_queue; 
                 }
             }
-            console.log(final_sorted_queue);
+            this.store.queue = final_sorted_queue;
+        }
+        if (columnName === "name_descending") {
+            var final_sorted_queue = [];
+            for (var i = 0; i < this.store.queue.length; i++) {
+                var current_item = this.store.queue[i];
+                if (i == 0) {
+                    final_sorted_queue.push(current_item);
+                } else {
+                    // second item must compare to all items in new queue
+                    var newly_sorted_queue = [];
+                    var item_in_sort_position = false;
+                    for (var j = 0; j < final_sorted_queue.length; j++) {
+                        // item in appropriate position, all remaining items in the final_sorted_queue can go to the end
+                        if (item_in_sort_position) {
+                            newly_sorted_queue.push(final_sorted_queue[j]);
+                            continue;
+                        }
+
+                        if (current_item[0] > final_sorted_queue[j][0]) {
+                            newly_sorted_queue.push(current_item);
+                            newly_sorted_queue.push(final_sorted_queue[j]);
+                            item_in_sort_position = true;
+                        } else {
+                            newly_sorted_queue.push(final_sorted_queue[j]);
+                            // if the last item was compared, and current_item is actually supposed to be the last one
+                            if (j == (final_sorted_queue.length - 1)) {
+                                newly_sorted_queue.push(current_item);
+                            }
+                        }
+                    }
+                    final_sorted_queue = newly_sorted_queue; 
+                }
+            }
+            this.store.queue = final_sorted_queue;
+        }
+
+        if (columnName === "quantity_ascending") {
+            var final_sorted_queue = [];
+            for (var i = 0; i < this.store.queue.length; i++) {
+                var current_item = this.store.queue[i];
+                if (i == 0) {
+                    final_sorted_queue.push(current_item);
+                } else {
+                    // second item must compare to all items in new queue
+                    var newly_sorted_queue = [];
+                    var item_in_sort_position = false;
+                    for (var j = 0; j < final_sorted_queue.length; j++) {
+                        // item in appropriate position, all remaining items in the final_sorted_queue can go to the end
+                        if (item_in_sort_position) {
+                            newly_sorted_queue.push(final_sorted_queue[j]);
+                            continue;
+                        }
+
+                        if (current_item[2] < final_sorted_queue[j][2]) {
+                            newly_sorted_queue.push(current_item);
+                            newly_sorted_queue.push(final_sorted_queue[j]);
+                            item_in_sort_position = true;
+                        } else {
+                            newly_sorted_queue.push(final_sorted_queue[j]);
+                            // if the last item was compared, and current_item is actually supposed to be the last one
+                            if (j == (final_sorted_queue.length - 1)) {
+                                newly_sorted_queue.push(current_item);
+                            }
+                        }
+                    }
+                    final_sorted_queue = newly_sorted_queue; 
+                }
+            }
+            this.store.queue = final_sorted_queue;
+        }
+        if (columnName === "quantity_descending") {
+            var final_sorted_queue = [];
+            for (var i = 0; i < this.store.queue.length; i++) {
+                var current_item = this.store.queue[i];
+                if (i == 0) {
+                    final_sorted_queue.push(current_item);
+                } else {
+                    // second item must compare to all items in new queue
+                    var newly_sorted_queue = [];
+                    var item_in_sort_position = false;
+                    for (var j = 0; j < final_sorted_queue.length; j++) {
+                        // item in appropriate position, all remaining items in the final_sorted_queue can go to the end
+                        if (item_in_sort_position) {
+                            newly_sorted_queue.push(final_sorted_queue[j]);
+                            continue;
+                        }
+
+                        if (current_item[2] > final_sorted_queue[j][2]) {
+                            newly_sorted_queue.push(current_item);
+                            newly_sorted_queue.push(final_sorted_queue[j]);
+                            item_in_sort_position = true;
+                        } else {
+                            newly_sorted_queue.push(final_sorted_queue[j]);
+                            // if the last item was compared, and current_item is actually supposed to be the last one
+                            if (j == (final_sorted_queue.length - 1)) {
+                                newly_sorted_queue.push(current_item);
+                            }
+                        }
+                    }
+                    final_sorted_queue = newly_sorted_queue; 
+                }
+            }
             this.store.queue = final_sorted_queue;
         }
         this.render();
@@ -371,7 +472,16 @@ class StatusTable {
                     <button class="clear_history_button">Clear All History!</button>
                     <br>
                     <br>
-                    <button class="sort_button">Sort By Ascending Name!</button>
+                    <button class="sort_ascending_button">Sort By Ascending Name!</button>
+                    <br>
+                    <br>
+                    <button class="sort_descending_button">Sort By Descending Name!</button>
+                    <br>
+                    <br>
+                    <button class="sort_ascending_quantity_button">Sort By Ascending Quantity!</button>
+                    <br>
+                    <br>
+                    <button class="sort_descending_quantity_button">Sort By Descending Quantity!</button>
                 </td>
             </tr>`;
 
@@ -379,9 +489,21 @@ class StatusTable {
         clearHistoryButton.addEventListener('click', () => {
             this.clearHistory();
         });
-        let sortButton = document.querySelector('.sort_button');
-        sortButton.addEventListener('click', () => {
+        let sortAscendingButton = document.querySelector('.sort_ascending_button');
+        sortAscendingButton.addEventListener('click', () => {
             this.sort("name_ascending");
+        });
+        let sortDescendingButton = document.querySelector('.sort_descending_button');
+        sortDescendingButton.addEventListener('click', () => {
+            this.sort("name_descending");
+        });
+        let sortAscendingQuantityButton = document.querySelector('.sort_ascending_quantity_button');
+        sortAscendingQuantityButton.addEventListener('click', () => {
+            this.sort("quantity_ascending");
+        });
+        let sortDescendingQuantityButton = document.querySelector('.sort_descending_quantity_button');
+        sortDescendingQuantityButton.addEventListener('click', () => {
+            this.sort("quantity_descending");
         });
     }
 }
