@@ -101,16 +101,30 @@ class Cart {
     placeOrder () {
         // add item to statuses in store as status "in progress"
         if (this.items !== null) {
-            var queueItems = [];
+            var newQueueItems = [];
+
+            // everything in 
             if (this.store.queue !== null) {
                 for (var i = 0; i < this.store.queue.length; i++) {
-                    queueItems.push(this.store.queue[i]);
+                    newQueueItems.push(this.store.queue[i]);
                 }
             }
+        
             for (var i = 0; i < this.items.length; i++) {
-                queueItems.push([this.items[i][0], this.items[i][1], Number(this.items[i][2])]);
+                var new_item_added = true;
+                for (var j = 0; j < newQueueItems.length; j++) {
+                    var existing_queue_item_name = newQueueItems[j][0];
+                    if (this.items[i][0] === existing_queue_item_name) {
+                        var amount_to_add = Number(this.items[i][2]);
+                        newQueueItems[j][2] += amount_to_add;
+                        new_item_added = false;
+                    }
+                }
+                if (new_item_added) {
+                    newQueueItems.push([this.items[i][0], this.items[i][1], Number(this.items[i][2])]);
+                }
             }
-            this.store.queue = queueItems;
+            this.store.queue = newQueueItems;
             this.order_placed = true;
             this.removeAllItems();
         }
@@ -118,6 +132,7 @@ class Cart {
 
     // render a list of item under root element
     render () {
+        this.items = this.store.cartItems;
         let tbody = this.root.querySelector('tbody');
         // using innerHTML to render a list of table row item under tbody
         tbody.innerHTML = ``;
@@ -128,6 +143,7 @@ class Cart {
             `<tr class="cart-table">
                 <td class="cart-table">
                     <p class="title">Order Placed Successfully!</p>
+                    <p>See your order <a href="statuses.html" class="link">here</a>.</p>
                 </td>
             </tr>`; 
             this.order_placed = false;
@@ -194,11 +210,12 @@ class Cart {
 }    
 
 class CheckoutButton {
-    constructor(root, store) {
+    constructor(root, store, cart) {
         this.root = root;
         this.store = store;
         this.onClick = () => this.addItemToCart();
         this.init();
+        this.cart = cart;
     }
 
     init () {
@@ -228,6 +245,7 @@ class CheckoutButton {
             cartItems.push([this.root.dataset.name, this.root.dataset.image, Number(this.root.dataset.quantity)]);
         }
         this.store.cartItems = cartItems;
+        this.cart.render();
     }
 }
 
@@ -255,6 +273,34 @@ class StatusTable {
 
     sort (columnName) {
         // after sorting the array of statuses, re render item to update view
+        if (columnName === "name_ascending") {
+            //debugger;
+            var final_sorted_queue = [];
+            for (var i = 0; i < this.store.queue.length; i++) {
+                var current_item = this.store.queue[i];
+                if (i == 0) {
+                    final_sorted_queue.push(current_item);
+                } else {
+                    // second item must compare to all items in new queue
+                    var newly_sorted_queue = [];
+                    var item_in_sort_position = false;
+                    for (var j = 0; j < final_sorted_queue.length; j++) {
+                        // item in appropriate position, all remaining items in the final_sorted_queue can go to the end
+                        if (item_in_sort_position) {
+                            newly_sorted_queue.push(current_item);
+                            break;
+                        }
+                        if (current_item[0] < final_sorted_queue[j][0]) {
+                            newly_sorted_queue.push(current_item);
+                            newly_sorted_queue.push(final_sorted_queue[j]);
+                            item_in_sort_position = true;
+                        } 
+                    }
+                    final_sorted_queue = newly_sorted_queue; 
+                }
+            }
+            this.store.queue = final_sorted_queue;
+        }
         this.render();
     }
 
@@ -315,12 +361,19 @@ class StatusTable {
             `<tr class="cart-table">
                 <td class="cart-table" colspan="3">
                     <button class="clear_history_button">Clear All History!</button>
+                    <br>
+                    <br>
+                    <button class="sort_button">Sort By Ascending Name!</button>
                 </td>
             </tr>`;
 
         let clearHistoryButton = document.querySelector('.clear_history_button');
         clearHistoryButton.addEventListener('click', () => {
             this.clearHistory();
+        });
+        let sortButton = document.querySelector('.sort_button');
+        sortButton.addEventListener('click', () => {
+            this.sort("name_ascending");
         });
     }
 }
@@ -341,11 +394,11 @@ document.addEventListener('DOMContentLoaded', () => {
         new StatusTable(statusTable, store);
     }
     if (cart) {
-        new Cart(cart, store);
+        var cartVar = new Cart(cart, store);
     }
     if (checkoutButtons && checkoutButtons.length) {
-        for (var i = 0; i < checkoutButtons.length; i ++) {
-            new CheckoutButton(checkoutButtons[i], store);
+        for (var i = 0; i < checkoutButtons.length; i++) {
+            new CheckoutButton(checkoutButtons[i], store, cartVar);
         }
     }
 });
