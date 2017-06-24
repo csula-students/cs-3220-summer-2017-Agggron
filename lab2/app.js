@@ -287,18 +287,26 @@ class StatusTable {
                     for (var j = 0; j < final_sorted_queue.length; j++) {
                         // item in appropriate position, all remaining items in the final_sorted_queue can go to the end
                         if (item_in_sort_position) {
-                            newly_sorted_queue.push(current_item);
-                            break;
+                            newly_sorted_queue.push(final_sorted_queue[j]);
+                            continue;
                         }
+
                         if (current_item[0] < final_sorted_queue[j][0]) {
                             newly_sorted_queue.push(current_item);
                             newly_sorted_queue.push(final_sorted_queue[j]);
                             item_in_sort_position = true;
-                        } 
+                        } else {
+                            newly_sorted_queue.push(final_sorted_queue[j]);
+                            // if the last item was compared, and current_item is actually supposed to be the last one
+                            if (j == (final_sorted_queue.length - 1)) {
+                                newly_sorted_queue.push(current_item);
+                            }
+                        }
                     }
                     final_sorted_queue = newly_sorted_queue; 
                 }
             }
+            console.log(final_sorted_queue);
             this.store.queue = final_sorted_queue;
         }
         this.render();
