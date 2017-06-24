@@ -1,0 +1,151 @@
+html {
+	margin: 0;
+	padding: 0;
+	background-color: black;
+}
+header {
+	color: red;
+	font-size: 18px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5em 0.25em 0.5em 0.25em;
+}
+
+.navigation {
+	color: red;
+	font-size: 28px;
+	font-family: 'Ceviche One', cursive;
+	text-decoration: none;
+	background-color: #ccc;
+	border-radius: 25px;
+	padding: 0.5em;
+}
+.navigation:hover {
+	color: blue;
+}
+main {
+	font-family: 'Calibri';
+	font-size: 20px;
+	padding: 0.5em;
+	color: white;
+}
+footer {
+	font-size: 16px;
+	padding: 1em;
+	color: white;
+}
+h1 {
+	font-size: 36px;
+	font-family: 'Cinzel', serif;
+	margin: 0;
+}
+h2 {
+	font-size: 30px;
+	text-align: center;
+	text-transform: uppercase;
+}
+h3 {
+	font-size: 24px;
+	font-style: bold;
+	text-align: center;
+}
+h4 {
+	font-size: 20px;
+	font-style: bold;
+	text-transform: uppercase;
+	margin: 0px;
+}
+h5 {
+	font-size: 16px;
+	font-style: bold;
+}
+.quote {
+	font-style: italic;
+}
+table {
+	border-collapse: collapse;
+}
+table, th, td {
+	border-left: 5px solid white;
+	border-right: 5px solid white;
+}
+td {
+	padding: 0.5em 0.5em 0.5em 0.5em;
+	text-align: center;
+	vertical-align: center;
+	width: 10%;
+}
+.td_status {
+	border-top: 5px solid white;
+	border-bottom: 5px solid white;
+	border-left: 0px;
+	border-right: 0px;
+}
+.cart-table {
+	max-width: 50%;
+	border-top: 3px solid white;
+	border-bottom: 3px solid white;
+	border-left: 0px;
+	border-right: 0px;
+}
+.cart-table.title {
+	font-size: 28px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.order_status_table {
+	max-width: 60%;
+	border-top: 3px solid white;
+	border-bottom: 3px solid white;
+	border-left: 0px;
+	border-right: 0px;
+}
+.order_status_table.title {
+	font-size: 24px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.order_status_table.text {
+	font-size: 24px;
+	font-weight: bold;
+}
+p.title {
+	font-size: 24px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+.delivered, .pickup {
+	font-style: italic;
+}
+button {
+	color: red;
+	font-size: 24px;
+	font-family: 'Ceviche One', cursive;
+	text-decoration: none;
+	background-color: #ccc;
+	border-radius: 5px;
+	padding: 0.3em;
+}
+button:hover {
+	color: blue;
+}
+.link {
+	text-decoration: none;
+	color: red;
+}
+.link:hover {
+	color: blue;
+}
+.small {
+	width: 75px;
+	height: 75px;
+}
+.home {
+	border: none;
+	max-width: 80%;
+}
