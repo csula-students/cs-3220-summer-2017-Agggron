@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>The Brewery</title>
+	<link rel="stylesheet" href="../app.css">
+	<script src="../app.js"></script>
+	
+	<link href="https://fonts.googleapis.com/css?family=Ceviche+One|Cinzel:900" rel="stylesheet"> 
+</head>
+<body>
+	<header>
+		<img src="http://orig15.deviantart.net/2aca/f/2013/128/6/c/red_dragon_inn_logo_by_kennon9-d64m29f.jpg" width=20% height=250%> 
+
+		<h1>THE RED DRAGON INN</h1>
+
+		<nav>
+			<a href="index.html" class="navigation">The Quarters</a>
+			<a href="create-food-item.html" class="navigation">The Brewery</a>
+			<a href="inventory.html" class="navigation">The Stockroom</a>
+		</nav>
+		
+	</header>
+
+	<main>
+		<h2>Brewing a New Liquor</h2>
+
+		<form id="create_liquor_form">
+			<fieldset>
+				<legend><h2>Liquor Information</h2></legend>
+				<table>
+					<tr>
+						<td>
+							<h4>Liquor Name:</h4>
+							<input type="text" name="name" id="liquor_name"></input>
+							<br><br>
+							<h4>Image Link:</h4>
+							<input type="text" name="image" id="liquor_image"></input>
+							<br><br>
+							<h4>Liquor Description:</h4>
+							<input id="liquor_description" name="description" rows="5"></input>
+						</td>
+						<td>
+							<p id="before_brew_message"></p>
+							<button id="create_liquor_button" type="button">Brew Liquor!</button>
+							<p id="added_brew_message"></p>
+						</td>
+						<td>
+							<img src="../../images/cauldron.jpg" width=400px height=250px>
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</form>
+
+		<p>Click <a href="index.html" class="link">here</a> to return to the Innkeeper's Quarters.</p>
+	</main>
+	<footer>
+		© 2017 Aaron Tang, Inc., All Rights Reserved.
+	</footer>
+</body>
+</html>
