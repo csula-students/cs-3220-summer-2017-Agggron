@@ -110,6 +110,19 @@ td {
 #inventory_table {
 	max-width: 65%;
 }
+.menu1 {
+	width: 10%;
+}
+.menu2 {
+	max-width: 20%;
+}
+.menu3 {
+	max-width: 60%;
+
+}
+.menu1 {
+	max-width: 20%;
+}
 .horizontal {
 	border-top: 3px solid white;
 	border-bottom: 3px solid white;
@@ -150,6 +163,10 @@ button:hover {
 .small {
 	width: 75px;
 	height: 75px;
+}
+.medium {
+	width: 150px;
+	height: 150px;
 }
 .home {
 	border: none;

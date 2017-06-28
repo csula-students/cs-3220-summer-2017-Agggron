@@ -142,8 +142,8 @@ class Cart {
             tbody.innerHTML += 
             `<tr class="cart-table">
                 <td class="cart-table">
-                    <p class="title">Order Placed Successfully!</p>
-                    <p>See your order <a href="statuses.html" class="link">here</a>.</p>
+                    <p class="title">Purchase Made Successfully!</p>
+                    <p>See your purchase <a href="statuses.html" class="link">here</a>.</p>
                 </td>
             </tr>`; 
             this.order_placed = false;
@@ -152,7 +152,7 @@ class Cart {
             tbody.innerHTML +=
             `<tr class="cart-table">
                 <td class="cart-table">
-                    <p>Nothing! Go on, buy some more liquor!</p>
+                    <p>Nothing! Go on, order some more liquor!</p>
                     <img src="../images/bartender.jpg" width=150px height=120px>
                 </td>
             </tr>`; 
@@ -174,7 +174,7 @@ class Cart {
                         <h4>${item_quantity}</h4>
                     </td>
                     <td class="cart-table">
-                        <button class="remove_button" data-name=${item_name} data-index=${i}>Remove From Inventory!</button>
+                        <button class="remove_button" data-name=${item_name} data-index=${i}>Remove Order!</button>
                     </td>
                 </tr>`;
         }
@@ -182,9 +182,9 @@ class Cart {
         tbody.innerHTML += 
             `<tr class="cart-table">
                 <td class="cart-table" colspan="3">
-                    <button class="remove_all_button">Clear All From Inventory!</button>
+                    <button class="remove_all_button">Clear All Orders!</button>
                     <br><br>
-                    <button class="confirm_order_button">Submit Inventory Request!</button>
+                    <button class="confirm_order_button">Submit Purchase Request!</button>
                 </td>
             </tr>`;
         
@@ -219,6 +219,7 @@ class CheckoutButton {
     }
 
     init () {
+        console.log(this.root + " button called");
         this.root.addEventListener("click", this.onClick);
     }
 
@@ -229,12 +230,13 @@ class CheckoutButton {
     addItemToCart () {
         // hint: you can use `dataset` to access data attributes
         // See passing data from HTML to JavaScript from course note
+        console.log(this.root);
         let cartItems = this.store.cartItems || [];
         // TODO: replace with actual item
         var new_cart_item = true;
         for (var i = 0; i < cartItems.length; i++) {
             // go through each item name in cartItems. If they match, increase the quantity of existing item in cartItems by 1. Otherwise, add the item as a new entry in cartItems.
-            var existing_cart_item_name = cartItems[i][0]
+            var existing_cart_item_name = cartItems[i]
             if (this.root.dataset.name === existing_cart_item_name) {
                 var amount_to_add = Number(this.root.dataset.quantity);
                 cartItems[i][2] += amount_to_add;
@@ -244,6 +246,7 @@ class CheckoutButton {
         if (new_cart_item) {
             cartItems.push([this.root.dataset.name, this.root.dataset.image, Number(this.root.dataset.quantity)]);
         }
+
         this.store.cartItems = cartItems;
         this.cart.render();
     }
@@ -560,7 +563,7 @@ class Inventory {
         let storeFoods = this.store.foods || [];
 
         var unholy_water = {name: "Unholy Water", image: "../../images/potion1.png", description: "Cursed and hexed by numerous witches, this potion has been known to induce aggression and spite in its drinkers."};
-        var dragon_breath_ale = {name: "Dragon Breath Ale", image: "../../images/potion2.png", description: "CSince the days of old, knights have been known to consume the scorched liquor of dragons to acquire immunity to flame."};
+        var dragon_breath_ale = {name: "Dragon Breath Ale", image: "../../images/potion2.png", description: "Since the days of old, knights have been known to consume the scorched liquor of dragons to acquire immunity to flame."};
         var matrix_mead = {name: "Matrix Mead", image: "../../images/potion3.png", description: "What happens if you mix a blue pill and a red pill together? Only the truly brave would dare to find out..."};
         var stealth_swill = {name: "Stealth Swill", image: "../../images/potion4.png", description: "Want to spy on your mortal enemy? A swig of this swill will turn you invisible. Even the bottle itself is disappearing!"};
         var gnomish_gin = {name: "Gnomish Gin", image: "../../images/potion5.png", description: "This refreshing concoction has been imbued with secretive gnomish medicinal herbs, perfect for all your combat ailments."};
@@ -639,9 +642,10 @@ class Inventory {
 }
 
 class Menu {
-    constructor(root, store) {
+    constructor(root, store, cart) {
         this.root = root;
         this.store = store;
+        this.cart = cart;
         this.init();
     }
 
@@ -651,6 +655,37 @@ class Menu {
 
     render () {
         // TODO: render a list of food menu from store using innerHTML
+        let tbody = this.root.querySelector('tbody');
+
+        for (var i = 0; i < this.store.foods.length; i++) {
+            // for each item in local storage's FOODS, create a row with a cell for the item name and image, and one for description.
+            var liquor_name = this.store.foods[i].name;
+            var liquor_image = this.store.foods[i].image;
+            if (liquor_image.startsWith("../")) {
+                liquor_image = liquor_image.slice(3);
+            }
+            var liquor_description = this.store.foods[i].description;
+            console.log("items include " + liquor_name + " " + liquor_image);
+
+            tbody.innerHTML +=
+                `<tr class="horizontal">
+                    <td class="horizontal menu1"><h3>${liquor_name}</h3></td>
+                    <td class="horizontal menu2"><img class="medium" src=${liquor_image}>
+                    </td>
+                    <td class="horizontal menu3"><p>${liquor_description}</p>
+                    </td>
+                    <td class="horizontal menu4">
+                        <button class="checkout-button" data-name="${liquor_name}" data-image="${liquor_image}" data-quantity=1>Order Drink!</button>
+                     </td>
+                  </tr>`;
+        }
+
+        let checkoutButtons = document.querySelectorAll('.checkout-button');
+        if (checkoutButtons && checkoutButtons.length) {
+            for (var i = 0; i < checkoutButtons.length; i++) {
+                new CheckoutButton(checkoutButtons[i], this.store, this.cart);
+            }
+        }
     }
 }
 
@@ -732,6 +767,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // finding the form element to createFood
     let createFood = document.querySelector('#create_liquor_form');
     let inventory = document.querySelector('#inventory_table');
+    let menu = document.querySelector('#menu_table');
 
     let store = new Store(window.localStorage);
 
@@ -752,5 +788,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (inventory) {
         new Inventory(inventory, store);
+    }
+    if (menu) {
+        new Menu(menu, store, cartVar);
     }
 });
