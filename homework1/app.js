@@ -519,14 +519,68 @@ class Inventory {
     init () {
         this.render();
         // TODO: attach event listeners like click to remove items after rendering
+        /* Event listeners added in render() function */
     }
 
     destroy () {
         // TODO: remove event listeners added from the init above
+        let inventoryAddDefaultButton = document.querySelector('.inventory_add_default_button');
+        if (inventoryAddDefaultButton) {
+            inventoryAddDefaultButton.removeEventListener("click", () => {
+                this.addDefaultItems();
+            });
+        }
+
+        let removeInventoryButtons = document.querySelectorAll('.remove_inventory_button');
+        for (var i = 0; i < removeInventoryButtons.length; i++) {
+            let btn = removeInventoryButtons[i];
+            btn.removeEventListener('click', () => {
+                let item = this.store.foods[parseInt(btn.dataset.index)];
+                this.removeItem(item);
+            });
+        }
     }
 
     removeItem (itemName) {
         // TODO: function to remove item given item name from store
+        if (this.store.foods !== null) {
+            var updated_list = [];
+            var to_compare = itemName.name;
+            for (var i = 0; i < this.store.foods.length; i++) {
+                if (this.store.foods[i].name !== to_compare) {
+                    updated_list.push(this.store.foods[i]);
+                }
+            }
+            this.store.foods = updated_list;
+        }
+        this.render();
+    }
+
+    addDefaultItems() {
+        let storeFoods = this.store.foods || [];
+
+        var unholy_water = {name: "Unholy Water", image: "../../images/potion1.png", description: "Cursed and hexed by numerous witches, this potion has been known to induce aggression and spite in its drinkers."};
+        var dragon_breath_ale = {name: "Dragon Breath Ale", image: "../../images/potion2.png", description: "CSince the days of old, knights have been known to consume the scorched liquor of dragons to acquire immunity to flame."};
+        var matrix_mead = {name: "Matrix Mead", image: "../../images/potion3.png", description: "What happens if you mix a blue pill and a red pill together? Only the truly brave would dare to find out..."};
+        var stealth_swill = {name: "Stealth Swill", image: "../../images/potion4.png", description: "Want to spy on your mortal enemy? A swig of this swill will turn you invisible. Even the bottle itself is disappearing!"};
+        var gnomish_gin = {name: "Gnomish Gin", image: "../../images/potion5.png", description: "This refreshing concoction has been imbued with secretive gnomish medicinal herbs, perfect for all your combat ailments."};
+        var updated_item_list = [unholy_water, dragon_breath_ale, matrix_mead, stealth_swill, gnomish_gin];
+
+        var is_new_liquor = true;
+        for (var i = 0; i < storeFoods.length; i++) {
+            var is_new_liquor = true;
+            for (var j = 0; j < updated_item_list.length; j++) {
+                if (storeFoods[i].name === updated_item_list[j].name) {
+                    is_new_liquor = false;
+                    break;
+                }
+            }
+            if (is_new_liquor) {
+                updated_item_list.push(storeFoods[i]);
+            }
+        }
+        this.store.foods = updated_item_list;
+        this.render();
     }
 
     render () {
@@ -535,58 +589,10 @@ class Inventory {
         // using innerHTML to render a list of table row item under tbody
         tbody.innerHTML = ``;
 
-        // add the five house-made liquors
-        tbody.innerHTML +=
-            `<tr class="horizontal">
-                <td class="horizontal"><h3>Unholy Water</h3>
-                    <img class="small" src="../../images/potion1.png">
-                </td>
-                <td><p>Cursed and hexed by numerous witches, this potion has been known to induce aggression and spite in its drinkers.</p>
-                </td>
-            </tr>
-            <tr class="horizontal">
-                <td class="horizontal"><h3>Dragon Breath Ale</h3>
-                    <img class="small" src="../../images/potion2.png">
-                </td>
-                <td><p>Since the days of old, knights have been known to consume the scorched liquor of dragons to acquire immunity to flame.</p>
-                </td>
-            </tr>
-            <tr class="horizontal">
-                <td class="horizontal"><h3>Matrix Mead</h3>
-                    <img class="small" src="../../images/potion3.png">
-                </td>
-                <td><p>What happens if you mix a blue pill and a red pill together? Only the truly brave would dare to find out...</p>
-                </td>
-            </tr>
-            <tr class="horizontal">
-                <td class="horizontal"><h3>Stealth Swill</h3>
-                    <img class="small" src="../../images/potion4.png">
-                </td>
-                <td><p>Want to spy on your mortal enemy? A swig of this swill will turn you invisible. Even the bottle itself is disappearing!</p>
-                </td>
-            </tr>
-            <tr class="horizontal">
-                <td class="horizontal"><h3>Gnomish Gin</h3>
-                    <img class="small" src="../../images/potion5.png">
-                </td>
-                <td><p>This refreshing concoction has been imbued with secretive gnomish medicinal herbs, perfect for all your combat ailments.</p>
-                </td>
-            </tr>
-            `;
-              
         // display message to add more liquor if there is no new recipes
         if (this.store.foods === null) {
             this.store.foods = [];
         } 
-        if (this.store.foods.length == 0) {
-            tbody.innerHTML +=
-            `<tr class="horizontal">
-                <td class="horizontal" colspan="2">That is it! Click <a href="create-food-item.html" class="link">here</a> to get brewing!</td>
-            </tr>
-            `; 
-            return;
-        }
-
         // display all of the user-submitted brews
         for (var i = 0; i < this.store.foods.length; i++) {
             // for each item in local storage's FOODS, create a row with a cell for the item name and image, and one for description.
@@ -601,8 +607,33 @@ class Inventory {
                     </td>
                     <td><p>${liquor_description}</p>
                     </td>
-                </tr>
-                `;
+                    <td class="horizontal">
+                        <button class="remove_inventory_button" data-index=${i}>Remove!</button>
+                     </td>
+                  </tr>`;
+        }
+
+        tbody.innerHTML += 
+        `<tr class="horizontal">
+            <td class="horizontal" colspan="3"><p>Continue brewing by clicking <a href="create-food-item.html" class="link">here</a>!</p>
+                <button class="inventory_add_default_button">Restore House Specials!</button>
+            </td>
+        </tr>`; 
+
+        let inventoryAddDefaultButton = document.querySelector('.inventory_add_default_button');
+        if (inventoryAddDefaultButton) {
+            inventoryAddDefaultButton.addEventListener("click", () => {
+                this.addDefaultItems();
+            });
+        }
+
+        let removeInventoryButtons = document.querySelectorAll('.remove_inventory_button');
+        for (var i = 0; i < removeInventoryButtons.length; i++) {
+            let btn = removeInventoryButtons[i];
+            btn.addEventListener('click', () => {
+                let item = this.store.foods[parseInt(btn.dataset.index)];
+                this.removeItem(item);
+            });
         }
     }
 }
@@ -641,9 +672,9 @@ class CreateFood {
         }
         document.getElementById("before_brew_message").innerHTML = 
             `<h4>Try this out!</h4>
-            <strong>NAME:</strong> Gnomish Gin<br>
-            <strong>IMAGE:</strong> ../../images/potion5.png<br>
-            <strong>DESCRIPTION:</strong> A gnomish delicacy!
+            <strong>NAME:</strong> Healing Salve<br>
+            <strong>IMAGE:</strong> ../../images/potion6.png<br>
+            <strong>DESCRIPTION:</strong> Recover a morsel of HP!
             `;
     }
 
@@ -658,19 +689,32 @@ class CreateFood {
         var to_push = {name: liquor_name, image: liquor_image, description: liquor_description};
 
         if (window.confirm("Are you sure you want to brew this liquor?") == true) {
-            document.getElementById("before_brew_message").innerHTML = ``;
 
-            document.getElementById("added_brew_message").innerHTML = 
-            `Added the following liquor:<br>
-                NAME: ${liquor_name}<br>
-                IMAGE LINK: ${liquor_image}<br>
-                DESCRIPTION: ${liquor_description}<br>
-                <br>
-                Click <a href="inventory.html" class="link">here</a> to check it out!
-            `;
+            // check to make sure submitted food is actually new
+            var is_new_liquor = true;
+            for (var i = 0; i < storeFoods.length; i++) {
+                if (to_push.name === storeFoods[i].name) {
+                    is_new_liquor = false;
+                    break;
+                }
+            }
+            if (is_new_liquor) {
+                storeFoods.push(to_push);
+                this.store.foods = storeFoods;
+                document.getElementById("before_brew_message").innerHTML = ``;
 
-            storeFoods.push(to_push)
-            this.store.foods = storeFoods;
+                document.getElementById("added_brew_message").innerHTML = 
+                `Added the following liquor:<br>
+                    NAME: ${liquor_name}<br>
+                    IMAGE LINK: ${liquor_image}<br>
+                    DESCRIPTION: ${liquor_description}<br>
+                    <br>
+                    Click <a href="inventory.html" class="link">here</a> to check it out!
+                `;
+            } else {
+                document.getElementById("added_brew_message").innerHTML = 
+                `Liquor already exists in the inventory. Try again!`;
+            }
         }
     }
 }
