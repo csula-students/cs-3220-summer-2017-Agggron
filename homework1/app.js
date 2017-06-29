@@ -219,7 +219,6 @@ class CheckoutButton {
     }
 
     init () {
-        console.log(this.root + " button called");
         this.root.addEventListener("click", this.onClick);
     }
 
@@ -230,13 +229,13 @@ class CheckoutButton {
     addItemToCart () {
         // hint: you can use `dataset` to access data attributes
         // See passing data from HTML to JavaScript from course note
-        console.log(this.root);
         let cartItems = this.store.cartItems || [];
         // TODO: replace with actual item
         var new_cart_item = true;
         for (var i = 0; i < cartItems.length; i++) {
             // go through each item name in cartItems. If they match, increase the quantity of existing item in cartItems by 1. Otherwise, add the item as a new entry in cartItems.
-            var existing_cart_item_name = cartItems[i]
+
+            var existing_cart_item_name = cartItems[i][0];
             if (this.root.dataset.name === existing_cart_item_name) {
                 var amount_to_add = Number(this.root.dataset.quantity);
                 cartItems[i][2] += amount_to_add;
@@ -665,7 +664,6 @@ class Menu {
                 liquor_image = liquor_image.slice(3);
             }
             var liquor_description = this.store.foods[i].description;
-            console.log("items include " + liquor_name + " " + liquor_image);
 
             tbody.innerHTML +=
                 `<tr class="horizontal">
@@ -700,7 +698,6 @@ class CreateFood {
         // attach click event to create button
         let createLiquorButton = document.getElementById('create_liquor_button');
         if (createLiquorButton) {
-            console.log("Button exists!");
             createLiquorButton.addEventListener("click", () => {
                 this.createFood();
             });
