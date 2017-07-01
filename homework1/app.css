@@ -107,6 +107,17 @@ td {
 	font-size: 24px;
 	font-weight: bold;
 }
+#order_status_control_table {
+	max-width: 60%;
+	min-width: 50%;
+	border-top: 3px solid white;
+	border-bottom: 3px solid white;
+	border-left: 0px;
+	border-right: 0px;
+}
+.order_status_control_table_td {
+	
+}
 #inventory_table {
 	max-width: 65%;
 }

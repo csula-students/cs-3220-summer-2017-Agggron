@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>The Brewery</title>
+	<title>The Stockroom</title>
 	<link rel="stylesheet" href="../app.css">
 	<script src="../app.js"></script>
 	
@@ -23,35 +23,18 @@
 	</header>
 
 	<main>
-		<h2>Brewing a New Liquor</h2>
-
-		<form id="create_liquor_form">
-			<fieldset>
-				<legend><h2>Liquor Information</h2></legend>
-				<table>
-					<tr>
-						<td>
-							<h4>Liquor Name:</h4>
-							<input type="text" name="name" id="liquor_name"></input>
-							<br><br>
-							<h4>Image Link:</h4>
-							<input type="text" name="image" id="liquor_image"></input>
-							<br><br>
-							<h4>Liquor Description:</h4>
-							<input id="liquor_description" name="description" rows="5"></input>
-						</td>
-						<td>
-							<p id="before_brew_message"></p>
-							<button id="create_liquor_button" type="button">Brew Liquor!</button>
-							<p id="added_brew_message"></p>
-						</td>
-						<td>
-							<img src="../../images/cauldron.jpg" width=400px height=250px>
-						</td>
-					</tr>
-				</table>
-			</fieldset>
-		</form>
+		<h2>Order Status Management</h2>
+		
+		<table id="order_status_control_table" class="center horizontal">
+		<thead>
+				<th class="horizontal"><h3>Beverage</h3></th>
+				<th class="horizontal"><h3>Quantity</h3></th>
+				<th class="horizontal"><h3>Status</h3></th>
+				<th class="horizontal"></th>
+		</thead>
+		<tbody>
+		</tbody>
+		</table>
 
 		<p>Click <a href="index.html" class="link">here</a> to return to the Innkeeper's Quarters.</p>
 	</main>
