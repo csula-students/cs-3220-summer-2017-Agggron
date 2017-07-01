@@ -121,7 +121,7 @@ class Cart {
                     }
                 }
                 if (new_item_added) {
-                    newQueueItems.push([this.items[i][0], this.items[i][1], Number(this.items[i][2])]);
+                    newQueueItems.push([this.items[i][0], this.items[i][1], Number(this.items[i][2]), "In Progress!"]);
                 }
             }
             this.store.queue = newQueueItems;
@@ -452,6 +452,7 @@ class StatusTable {
             var item_name = this.store.queue[i][0];
             var image_name = this.store.queue[i][1];
             var item_quantity = Number(this.store.queue[i][2]);
+            var item_status = this.store.queue[i][3];
 
             tbody.innerHTML +=
                 `<tr class="order_status_table">
@@ -463,7 +464,95 @@ class StatusTable {
                         <h4>${item_quantity}</h4>
                     </td>
                     <td class="order_status_table">
-                        <h4>In Progress!</h4>
+                        <h4>${item_status}</h4>
+                    </td>
+                </tr>`;
+        }
+
+        tbody.innerHTML += 
+            `<tr class="cart-table">
+                <td class="cart-table" colspan="3">
+                    <button class="clear_history_button">Clear All History!</button>
+                    <br>
+                    <br>
+                    <button class="sort_ascending_button">Sort By Ascending Name!</button>
+                    <br>
+                    <br>
+                    <button class="sort_descending_button">Sort By Descending Name!</button>
+                    <br>
+                    <br>
+                    <button class="sort_ascending_quantity_button">Sort By Ascending Quantity!</button>
+                    <br>
+                    <br>
+                    <button class="sort_descending_quantity_button">Sort By Descending Quantity!</button>
+                </td>
+            </tr>`;
+
+        let clearHistoryButton = document.querySelector('.clear_history_button');
+        clearHistoryButton.addEventListener('click', () => {
+            this.clearHistory();
+        });
+        let sortAscendingButton = document.querySelector('.sort_ascending_button');
+        sortAscendingButton.addEventListener('click', () => {
+            this.sort("name_ascending");
+        });
+        let sortDescendingButton = document.querySelector('.sort_descending_button');
+        sortDescendingButton.addEventListener('click', () => {
+            this.sort("name_descending");
+        });
+        let sortAscendingQuantityButton = document.querySelector('.sort_ascending_quantity_button');
+        sortAscendingQuantityButton.addEventListener('click', () => {
+            this.sort("quantity_ascending");
+        });
+        let sortDescendingQuantityButton = document.querySelector('.sort_descending_quantity_button');
+        sortDescendingQuantityButton.addEventListener('click', () => {
+            this.sort("quantity_descending");
+        });
+    }
+}
+
+class AdminStatusTable extends StatusTable {
+    render() {
+        let tbody = this.root.querySelector('tbody');
+        // using innerHTML to render a list of table row item under tbody
+        tbody.innerHTML = ``;
+        if (this.store.queue === null) {
+            this.store.queue = [];
+        } 
+        if (this.store.queue.length == 0) {
+            tbody.innerHTML = `
+                <tr class="order_status_table_admin">
+                    <td class="order_status_table_admin"colspan="3">There are no orders!</td>
+                </tr>
+                `;
+            return;
+        }
+        tbody.innerHTML += 
+            `<tr class="order_status_table">
+                <td class="order_status_table title">Beverage</td>
+                <td class="order_status_table title">Quantity</td>
+                <td class="order_status_table title">Status</td>
+            </tr>`;
+
+        for (var i = 0; i < this.store.queue.length; i++) {
+            // for each item in local storage's QUEUE, create a row with a cell for the item name and image, a cell for quantity, and a cell for status (In Progress for now).
+            var item_name = this.store.queue[i][0];
+            var image_name = this.store.queue[i][1];
+            image_name = "../" + image_name;
+            var item_quantity = Number(this.store.queue[i][2]);
+            var item_status = this.store.queue[i][3];
+
+            tbody.innerHTML +=
+                `<tr class="order_status_table">
+                    <td class="order_status_table">
+                        <h4>${item_name}</h4>
+                        <img src=${image_name} class="small">
+                    </td>
+                    <td class="order_status_table">
+                        <h4>${item_quantity}</h4>
+                    </td>
+                    <td class="order_status_table">
+                        <h4>${item_status}</h4>
                     </td>
                 </tr>`;
         }
@@ -595,6 +684,7 @@ class Inventory {
         if (this.store.foods === null) {
             this.store.foods = [];
         } 
+
         // display all of the user-submitted brews
         for (var i = 0; i < this.store.foods.length; i++) {
             // for each item in local storage's FOODS, create a row with a cell for the item name and image, and one for description.
@@ -751,6 +841,84 @@ class CreateFood {
     }
 }
 
+class OrderStatusControlTable {
+    constructor(root, store) {
+        this.root = root;
+        this.store = store;
+        this.init();
+    }
+
+    init() {
+        this.render();
+    }
+
+    destroy() {
+        // removes EventListeners for updateOrderStatusControlTable buttons
+    }
+
+    render() {
+        let tbody = this.root.querySelector('tbody');
+        tbody.innerHTML = ``;
+        if (this.store.queue === null) {
+            this.store.queue = [];
+        }
+        for (var i = 0; i < this.store.queue.length; i++) {
+            var name = this.store.queue[i][0];
+            var status_name = name + " Status";
+            var image = this.store.queue[i][1];
+            image = '../' + image;
+            var quantity = this.store.queue[i][2];
+            var status = this.store.queue[i][3];
+
+            tbody.innerHTML += `
+                <tr class="order_status_control_table_td">
+                    <td class="order_status_control_table_td"><h4>${name}</h4><br>
+                    <img class="small" src=${image}></td>
+                    
+                    <td class="order_status_control_table_td"><h4>${quantity}</h4></td>
+                    
+                    <td class="order_status_control_table_td"><h4>${status}</h4></td>
+                    
+                    <td class="order_status_control_table_td"><input type="text" id="${status_name}"><br><br>
+                    <button class="update_status_button" data-name="${name}">Update Status!</button></td>
+                </tr>
+            `;
+        }
+
+        let updateStatusButtons = this.root.querySelectorAll('.update_status_button');
+
+        if (updateStatusButtons) {
+            for (var i = 0; i < updateStatusButtons.length; i++) {
+                let btn = updateStatusButtons[i];
+                btn.addEventListener("click", () => {
+                    this.updateStatus(btn.dataset.name);
+                });
+            }
+        }
+    }
+
+    updateStatus(name) {
+        var status_name = name + " Status";
+        var inputToTrack = document.getElementById(status_name);
+        if (this.store.queue !== null) {
+            var newQueue = [];
+
+            for (var i = 0; i < this.store.queue.length; i++) {
+                // looks like cannot mutate value of this.store.queue directly, so will need to create a new array of queue items and then set this.store.queue equal to the new queue
+                let queueItem = this.store.queue[i];
+                if (name == queueItem[0]) {
+                    queueItem[3] = inputToTrack.value;
+                }
+                newQueue.push(queueItem);
+            }
+            this.store.queue = newQueue;
+        }
+        
+        this.render();
+    }
+
+}
+
 // DOMContentLoaded event will allow us to run the following function when
 // everything is ready. Think of the following code will only be executed by
 // the end of document
@@ -765,6 +933,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let createFood = document.querySelector('#create_liquor_form');
     let inventory = document.querySelector('#inventory_table');
     let menu = document.querySelector('#menu_table');
+    let orderStatusControlTable = document.querySelector('#order_status_control_table');
+    let adminStatusTable = document.querySelector('.order_status_table_admin');
 
     let store = new Store(window.localStorage);
 
@@ -788,5 +958,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (menu) {
         new Menu(menu, store, cartVar);
+    }
+    if (orderStatusControlTable) {
+        new OrderStatusControlTable(orderStatusControlTable, store);
+    }
+    if (adminStatusTable) {
+        new AdminStatusTable(adminStatusTable, store);
     }
 });
