@@ -10,12 +10,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Yellow Moon Inn: Inventory</title>
         <link rel="stylesheet" href="<c:url value='../app.css' />">
+        <link href="<c:url value='https://fonts.googleapis.com/css?family=Ceviche+One|Cinzel:900' />" rel="stylesheet"> 
     </head>
     <body>
+        <header>
+            <img src="<c:url value='../images/yellow-moon.jpg' />" width=150px height=150px class="header_image">
+            The Yellow Moon Inn
+        </header>
 
-        <img src="<c:url value='../images/yellow-moon.jpg' />" width=150px height=150px>
-        <br>
-        <h1>Welcome to the Yellow Moon Inn!</h1>
+        <nav>
+            <a href="<c:url value='../admin/foods' />" class="navigation">The Lobby</a>
+            <a href="<c:url value='../admin/foods' />" class="navigation">Buy Items</a>
+            <a href="<c:url value='../admin/foods' />" class="navigation">Your Tab</a>
+            <a href="<c:url value='../admin/foods' />" class="navigation">The Stockroom</a>
+            <a href="<c:url value='../admin/foods' />" class="navigation">The Brewery</a>
+            <a href="<c:url value='../admin/foods' />" class="navigation">The Chancery</a>
+        </nav>
 
+        <main>
+            <h2>Welcome to the Yellow Moon Inn!</h2>
+            
+            <p>"You and your adventuring companions have spent all day slogging through the Dungeon, killing monsters and taking their stuff. Now you're back in town, healed up, cleaned up, and ready to party at the Yellow Moon Inn."</p>
+            
+            <p> Before your next quest, come check out what the Yellow Moon Inn has to offer! Browse our liquors, or manage what your party has been ordering!</p>
+                   
+        </main>
+
+        <footer>
+            © 2017 Aaron Tang, Inc., All Rights Reserved.
+        </footer>
     </body>
 </html>

@@ -2,3 +2,39 @@ body {
 	background-color: black;
 	color: white;
 }
+
+header {
+	color: yellow;
+	font-size: 36px;
+	font-family: 'Cinzel', serif;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+.header_image {
+	align-self: flex-start;
+}
+nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 0.5em;
+}
+.navigation {
+	color: black;
+	font-size: 26px;
+	font-family: 'Ceviche One', cursive;
+	text-decoration: none;
+	background-color: yellow;
+	border-radius: 25px;
+	padding: 0.5em;
+}
+.navigation:hover {
+	color: gray;
+}
+main {
+	font-family: 'Calibri';
+	font-size: 20px;
+	padding: 0.5em;
+	color: white;
+}
