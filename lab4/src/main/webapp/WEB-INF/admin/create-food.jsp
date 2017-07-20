@@ -8,7 +8,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Yellow Moon Inn: Inventory</title>
+        <title>Yellow Moon Inn: Create Food</title>
         <link rel="stylesheet" href="<c:url value='../../app.css' />">
         <link href="<c:url value='https://fonts.googleapis.com/css?family=Ceviche+One|Cinzel:900' />" rel="stylesheet"> 
     </head>
