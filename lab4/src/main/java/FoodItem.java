@@ -3,9 +3,9 @@ public class FoodItem {
 	public final String name;
 	public final String description;
 	public final String imgURL;
-	public final float price;
+	public final double price;
 
-	public FoodItem (int id, String name, String description, String imgURL, float price) {
+	public FoodItem (int id, String name, String description, String imgURL, double price) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -29,7 +29,7 @@ public class FoodItem {
 		return imgURL;
 	}
 
-	public float getPrice() {
+	public double getPrice() {
 		return price;
 	}
 }

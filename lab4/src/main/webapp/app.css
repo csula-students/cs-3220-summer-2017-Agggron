@@ -18,6 +18,8 @@ nav {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+	background-color: yellow;
+	border-radius: 20px;
 	padding: 0.5em;
 }
 .navigation {
@@ -25,16 +27,75 @@ nav {
 	font-size: 26px;
 	font-family: 'Ceviche One', cursive;
 	text-decoration: none;
-	background-color: yellow;
-	border-radius: 25px;
-	padding: 0.5em;
 }
 .navigation:hover {
 	color: gray;
 }
+
 main {
 	font-family: 'Calibri';
 	font-size: 20px;
 	padding: 0.5em;
 	color: white;
+}
+h2 {
+	font-size: 28px;
+	text-align: center;
+	text-transform: uppercase;
+}
+h3 {
+
+}
+h4 {
+
+}
+h5 {
+	font-size: 20px;
+	text-transform: uppercase;
+	font-size: bold;
+}
+
+table {
+	border-collapse: collapse;
+}
+th {
+	font-size: 24px;
+	font-style: bold;
+	text-transform: uppercase;
+	border-top: 3px solid white;
+	border-bottom: 3px solid white;
+	padding: 0.5em;
+}
+td {
+	padding: 0.25em;
+	text-align: center;
+	vertical-align: center;
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+.horizontal {
+	border-top: 3px solid white;
+	border-bottom: 3px solid white;
+	border-left: 0px;
+	border-right: 0px;
+	min-width: 50%;
+}
+.title {
+	text-transform: uppercase;
+	font-style: bold;
+}
+.small {
+	width: 75px;
+	height: 75px;
+}
+.medium {
+	width: 150px;
+	height: 150px;
+}
+
+footer {
+	padding: 0.5em;
 }

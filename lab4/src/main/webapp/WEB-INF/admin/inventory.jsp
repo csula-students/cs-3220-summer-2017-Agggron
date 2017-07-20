@@ -23,7 +23,7 @@
             <a href="<c:url value='../admin/foods' />" class="navigation">Buy Items</a>
             <a href="<c:url value='../admin/foods' />" class="navigation">Your Tab</a>
             <a href="<c:url value='../admin/foods' />" class="navigation">The Stockroom</a>
-            <a href="<c:url value='../admin/foods' />" class="navigation">The Brewery</a>
+            <a href="<c:url value='../admin/foods/create' />" class="navigation">The Brewery</a>
             <a href="<c:url value='../admin/foods' />" class="navigation">The Chancery</a>
         </nav>
 
@@ -33,7 +33,26 @@
             <p>"You and your adventuring companions have spent all day slogging through the Dungeon, killing monsters and taking their stuff. Now you're back in town, healed up, cleaned up, and ready to party at the Yellow Moon Inn."</p>
             
             <p> Before your next quest, come check out what the Yellow Moon Inn has to offer! Browse our liquors, or manage what your party has been ordering!</p>
-                   
+            
+            <table class="center horizontal">
+                <thead>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </thead>
+                <tbody>
+                    <c:forEach items="${inventory}" var="item">
+                        <tr>
+                            <td><p class="title">${item.name}</p>
+                                <img src="<c:url value='${item.imgURL}' />" class="small">
+                            </td>
+                            <td>${item.description}</td>
+                            <td>${item.price}</td>
+                        </li>
+                    </c:forEach> 
+                </tbody>
+            </table>
+
         </main>
 
         <footer>
