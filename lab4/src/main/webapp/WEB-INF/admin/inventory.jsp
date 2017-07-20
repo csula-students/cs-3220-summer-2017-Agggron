@@ -39,6 +39,7 @@
                     <th>Item</th>
                     <th>Description</th>
                     <th>Price</th>
+                    <th>Edit?</th>
                     <th>Delete?</th>
                 </thead>
                 <tbody>
@@ -49,6 +50,8 @@
                                 </td>
                             <td>${item.getDescription()}</td>
                             <td>${item.getPrice()}</td>
+                            <td><a href="<c:url value='../admin/foods/edit?id=${item.getId()}' />" class="button">Edit</a>
+                                </td>
                             <td><a href="<c:url value='../admin/foods/delete?id=${item.getId()}' />" class="button">Delete</a>
                                 </td>
                         </li>
