@@ -33,14 +33,14 @@
             
             <form method="post">
                 Liquor Name:<br>
-                <input type="text" name="name" value="Matrix Mead"><br>
+                <input type="text" name="name" value="${itemToEdit.getName()}"><br>
                 Liquor Image URL:<br>
-                <input type="text" name="imgURL" value="../../images/potion3.png"><br>
+                <input type="text" name="imgURL" value="${itemToEdit.getImgURL()}"><br>
                 Liquor Description:<br>
-                <input type="text" name="description" value="Red or blue pill?"><br>
+                <input type="text" name="description" value="${itemToEdit.getDescription()}"><br>
                 Liquor Price:<br>
-                <input type="number" name="price" value="2.0"><br><br>
-                <input type="submit" value="Add Brew to Inventory!">
+                <input type="number" name="price" value="${itemToEdit.getPrice()}"><br><br>
+                <input type="submit" value="Modify Liquor!">
             </form>
 
         </main>

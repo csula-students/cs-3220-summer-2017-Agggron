@@ -26,8 +26,6 @@ public class CreateFoodAdminServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String imgURL = request.getParameter("imgURL");
 		String description = request.getParameter("description");
-
-		/* Adding this line for the double results in a NullPointerException - the String cannot be parsed for some reason? */
 		double price = Double.parseDouble(request.getParameter("price"));
 
 		inventory.add(new FoodItem(id, name, description, imgURL, price));

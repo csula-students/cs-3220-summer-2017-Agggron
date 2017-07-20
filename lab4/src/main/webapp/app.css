@@ -31,6 +31,18 @@ nav {
 .navigation:hover {
 	color: gray;
 }
+.button {
+	background-color: yellow;
+	border-radius: 20px;
+	padding: 0.5em;
+	color: black;
+	font-size: 26px;
+	font-family: 'Ceviche One', cursive;
+	text-decoration: none;
+}
+.button:hover {
+	color: gray;
+}
 
 main {
 	font-family: 'Calibri';

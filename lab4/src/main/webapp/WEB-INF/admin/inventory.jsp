@@ -39,15 +39,18 @@
                     <th>Item</th>
                     <th>Description</th>
                     <th>Price</th>
+                    <th>Delete?</th>
                 </thead>
                 <tbody>
                     <c:forEach items="${inventory}" var="item">
                         <tr>
-                            <td><p class="title">${item.name}</p>
+                            <td><p class="title">${item.getName()}</p>
                                 <img src="<c:url value='${item.imgURL}' />" class="small">
-                            </td>
-                            <td>${item.description}</td>
-                            <td>${item.price}</td>
+                                </td>
+                            <td>${item.getDescription()}</td>
+                            <td>${item.getPrice()}</td>
+                            <td><a href="<c:url value='../admin/foods/delete?id=${item.getId()}' />" class="button">Delete</a>
+                                </td>
                         </li>
                     </c:forEach> 
                 </tbody>
