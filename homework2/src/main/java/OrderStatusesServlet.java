@@ -8,8 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/orders")
+@WebServlet(loadOnStartup=1, urlPatterns={"/orders"}) 
 public class OrderStatusesServlet extends HttpServlet {
+
+	public void init() {
+		List<Order> orders = new ArrayList<>();
+		getServletContext().setAttribute("orders", orders);
+	}
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

@@ -32,6 +32,32 @@
 
             <p>Requested a particular brew in the past? Keep track of what purchases you have made at the Yellow Moon Inn here!</p>
             
+            <table class="center horizontal">
+                <thead>
+                    <th>Liquor Requests</th>
+                    <th>Order Info</th>
+                    <th>Status</th>
+                </thead>
+                <tbody>
+                    <c:if test="${orders.size() == 0}">
+                        <tr>
+                            <td colspan="3"><p>You have made no orders of liquor! Drink some more, you teetotaler!</p></td>
+                        </tr>
+                    </c:if>
+                    <c:forEach items="${orders}" var="order">
+                        <tr>
+                            <td><ul>
+                                <c:forEach items="${order.getItems()}" var="item">
+                                    <li>${item.getQuantity()} x ${item.getName()} 
+                                </c:forEach> 
+                                </td>
+                            <td>${order.getCustomerName()}<br>
+                                ${order.getOrderTime()}</td>
+                            <td>${order.getStatus()}</td>
+                        </tr>
+                    </c:forEach> 
+                </tbody>
+            </table>
 
         </main>
 

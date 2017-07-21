@@ -51,7 +51,7 @@
                                 </td>
                             <td>${item.getQuantity()}</td>
                             <td><a href="<c:url value='/shopping-cart/remove?id=${item.getId()}' />" class="button">Remove From Tab!</a>    </td>
-                        </li>
+                        </tr>
                     </c:forEach> 
                     <c:if test="${cart.size() > 0}">
                         <tr>

@@ -39,36 +39,35 @@
 
             <h3> Manage Liquor Orders Here </h3>
             
-            
-            
             <table class="center horizontal">
                 <thead>
-                    <th class="six-column">Order Info</th>
-                    <th class="six-column">Customer Info</th>
-                    <th class="six-column">Order Time</th>
-                    <th class="six-column">Status</th>
-                    <th class="six-column">Edit?</th>
-                    <th class="six-column">Delete?</th>
+                    <th>Liquor Requests</th>
+                    <th>Order Info</th>
+                    <th>Status</th>
+                    <th>Edit?</th>
+                    <th>Delete</th>
                 </thead>
                 <tbody>
                     <c:if test="${orders.size() == 0}">
                         <tr>
-                            <td colspan="6"><p>There are no orders!</p></td>
+                            <td colspan="5"><p>There are currently no requsts for liquor.</p></td>
                         </tr>
                     </c:if>
                     <c:forEach items="${orders}" var="order">
-
                         <tr>
-                            <td><p>Order Info Here</p>
+                            <td><ul>
+                                <c:forEach items="${order.getItems()}" var="item">
+                                    <li>${item.getQuantity()} x ${item.getName()} 
+                                </c:forEach> 
                                 </td>
-                            <td>${order.getCustomerName()}</td>
-                            <td>${order.getOrderTime()}</td>
+                            <td>${order.getCustomerName()}<br>
+                                ${order.getOrderTime()}</td>
                             <td>${order.getStatus()}</td>
                             <td><a href="<c:url value='../admin/orders/edit?id=${order.getId()}' />" class="button">Edit Status</a>
                                 </td>
                             <td><a href="<c:url value='../admin/orders/delete?id=${order.getId()}' />" class="button">Delete</a>
                                 </td>
-                        </li>
+                        </tr>
                     </c:forEach> 
                 </tbody>
             </table>
