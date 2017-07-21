@@ -3,7 +3,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Order {
-	public enum Statuses {
+
+	public enum Status {
 		IN_QUEUE, IN_PROGRESS, COMPLETED
 	}
 
@@ -18,6 +19,11 @@ public class Order {
 		this.items = items;
 		this.customerName = customerName;
 		this.status = status;
+		/*for (Status acceptedValueForStatus : Status.values()) {
+			if (acceptedValueForStatus.toString() == status) {
+				this.status = status;
+			}
+		}*/
 		this.orderTime = orderTime;
 	}
 	

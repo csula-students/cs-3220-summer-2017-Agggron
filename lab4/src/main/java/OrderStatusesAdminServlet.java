@@ -17,7 +17,7 @@ public class OrderStatusesAdminServlet extends HttpServlet {
 		FoodItem unholyWater = new FoodItem(0, "Unholy Water", "Potion 1", "../../images/potion1.png", 2.5);
 		List<FoodItem> foodsInOrder = new ArrayList<>();
 		foodsInOrder.add(unholyWater);
-		orders.add(new Order(0, foodsInOrder, "Eric", "IN_PROGRESS", new Date(7, 18, 95)));
+		orders.add(new Order(0, foodsInOrder, "Eric", "IN_PROGRESS", new Date()));
 
 		getServletContext().setAttribute("orders", orders);
 	}

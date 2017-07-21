@@ -9,7 +9,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Yellow Moon Inn: Manage Orders</title>
-        <link rel="stylesheet" href="<c:url value='../app.css' />">
+        <link rel="stylesheet" href="<c:url value='/app.css' />">
         <link href="<c:url value='https://fonts.googleapis.com/css?family=Ceviche+One|Cinzel:900' />" rel="stylesheet"> 
     </head>
     <body>
@@ -24,7 +24,7 @@
             <a href="<c:url value='../admin/foods' />" class="navigation">Your Tab</a>
             <a href="<c:url value='../admin/foods' />" class="navigation">The Stockroom</a>
             <a href="<c:url value='../admin/foods/create' />" class="navigation">The Brewery</a>
-            <a href="<c:url value='../admin/foods' />" class="navigation">The Chancery</a>
+            <a href="<c:url value='../admin/orders' />" class="navigation underline">The Chancery</a>
         </nav>
 
         <main>
@@ -35,18 +35,29 @@
             
             <table class="center horizontal">
                 <thead>
-                    <th>Order</th>
-                    <th>Customer Info</th>
-                    <th>Status</th>
-                    <th>Delete?</th>
+                    <th class="six-column">Order Info</th>
+                    <th class="six-column">Customer Info</th>
+                    <th class="six-column">Order Time</th>
+                    <th class="six-column">Status</th>
+                    <th class="six-column">Edit?</th>
+                    <th class="six-column">Delete?</th>
                 </thead>
                 <tbody>
-                    <c:forEach items="${orders}" var="order">
+                    <c:if test="${orders.size() == 0}">
                         <tr>
-                            <td>Order Info Here
+                            <td colspan="6"><p>There are no orders!</p></td>
+                        </tr>
+                    </c:if>
+                    <c:forEach items="${orders}" var="order">
+
+                        <tr>
+                            <td><p>Order Info Here</p>
                                 </td>
                             <td>${order.getCustomerName()}</td>
+                            <td>${order.getOrderTime()}</td>
                             <td>${order.getStatus()}</td>
+                            <td><a href="<c:url value='../admin/orders/edit?id=${order.getId()}' />" class="button">Edit Status</a>
+                                </td>
                             <td><a href="<c:url value='../admin/orders/delete?id=${order.getId()}' />" class="button">Delete</a>
                                 </td>
                         </li>

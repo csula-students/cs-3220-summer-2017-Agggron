@@ -31,6 +31,16 @@ nav {
 .navigation:hover {
 	color: gray;
 }
+.navigation-selected {
+	background-color: black;
+	color: yellow;
+	font-size: 26px;
+	font-family: 'Ceviche One', cursive;
+	text-decoration: none;
+}
+.navigation-selected:hover {
+	color: white;
+}
 .button {
 	background-color: yellow;
 	border-radius: 20px;
@@ -67,6 +77,7 @@ h5 {
 	font-size: bold;
 }
 
+
 table {
 	border-collapse: collapse;
 }
@@ -94,6 +105,19 @@ td {
 	border-left: 0px;
 	border-right: 0px;
 	min-width: 50%;
+}
+.six-column {
+	max-width: 15%;
+	min-width: 15%;
+}
+.bold {
+	font-style: bold;
+}
+.italics {
+	font-style: italic;
+}
+.underline {
+	text-decoration: underline;
 }
 .title {
 	text-transform: uppercase;
