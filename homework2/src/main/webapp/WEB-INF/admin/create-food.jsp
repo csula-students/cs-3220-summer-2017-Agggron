@@ -37,11 +37,11 @@
             
             <form method="post">
                 Liquor Name:<br>
-                <input type="text" name="name" value="Matrix Mead"><br>
+                <input type="text" name="name" value="Healing Salve"><br>
                 Liquor Image URL:<br>
-                <input type="text" name="imgURL" value="../../images/potion3.png"><br>
+                <input type="text" name="imgURL" value="../../images/potion6.png"><br>
                 Liquor Description:<br>
-                <input type="text" name="description" value="Red or blue pill?"><br>
+                <input type="text" name="description" value="Useful for recovering a hearty dose of HP!"><br>
                 Liquor Price:<br>
                 <input type="number" name="price" value="2.0"><br><br>
                 <input type="submit" value="Add Brew to Inventory!">

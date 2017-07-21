@@ -9,7 +9,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Yellow Moon Inn: Inventory</title>
-        <link rel="stylesheet" href="<c:url value='../app.css' />">
+        <link rel="stylesheet" href="<c:url value='/app.css' />">
         <link href="<c:url value='https://fonts.googleapis.com/css?family=Ceviche+One|Cinzel:900' />" rel="stylesheet"> 
     </head>
     <body>
@@ -32,22 +32,21 @@
             
             <table class="center horizontal">
                 <thead>
-                    <th>Item</th>
+                    <th colspan="2">Item</th>
                     <th>Description</th>
                     <th>Price</th>
-                    <th>Buy?</th>
+                    <th></th>
                 </thead>
                 <tbody>
                     <c:forEach items="${inventory}" var="item">
                         <tr>
-                            <td><p class="title">${item.getName()}</p>
-                                <img src="<c:url value='${item.imgURL}' />" class="small">
-                                </td>
+                            <td><h5>${item.getName()}</h5></td>
+                            <td><img src="<c:url value='${item.imgURL}' />" class="medium"></td>
                             <td>${item.getDescription()}</td>
                             <td>${item.getPrice()}</td>
                             <td><a href="<c:url value='/menu/add?id=${item.getId()}' />" class="button">Add to Tab!</a>
                                 </td>
-                        </li>
+                        </tr>
                     </c:forEach> 
                 </tbody>
             </table>
