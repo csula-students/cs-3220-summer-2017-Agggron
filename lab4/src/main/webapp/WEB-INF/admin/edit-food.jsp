@@ -24,7 +24,7 @@
             <a href="<c:url value='../../admin/foods' />" class="navigation">Your Tab</a>
             <a href="<c:url value='../../admin/foods' />" class="navigation">The Stockroom</a>
             <a href="<c:url value='../../admin/foods/create' />" class="navigation">The Brewery</a>
-            <a href="<c:url value='../../admin/foods' />" class="navigation">The Chancery</a>
+            <a href="<c:url value='../../admin/orders' />" class="navigation">The Chancery</a>
         </nav>
 
         <main>
