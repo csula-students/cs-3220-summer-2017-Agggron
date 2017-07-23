@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("admin/foods/edit") 
+@WebServlet("/admin/foods/edit") 
 public class EditFoodAdminServlet extends HttpServlet {
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,7 +23,7 @@ public class EditFoodAdminServlet extends HttpServlet {
 			}
 		}
 		request.setAttribute("itemToEdit", itemToEdit);
-		request.getRequestDispatcher("../../WEB-INF/admin/edit-food.jsp")
+		request.getRequestDispatcher("/WEB-INF/admin/edit-food.jsp")
             .forward(request, response);
 	}
 

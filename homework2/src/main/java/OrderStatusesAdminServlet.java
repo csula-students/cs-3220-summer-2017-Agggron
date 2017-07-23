@@ -15,7 +15,7 @@ public class OrderStatusesAdminServlet extends HttpServlet {
 	public void doGet( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Order> orders = (List<Order>) getServletContext().getAttribute("orders");
 		request.setAttribute("orders", orders);
-		request.getRequestDispatcher("../WEB-INF/admin/order-statuses.jsp")
+		request.getRequestDispatcher("/WEB-INF/admin/order-statuses.jsp")
             .forward(request, response);
 	}
 }

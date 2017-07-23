@@ -38,6 +38,6 @@ public class AddItemToCartServlet extends HttpServlet {
 
 		getServletContext().setAttribute("cart", cart);
 
-		response.sendRedirect("/shopping-cart");
+		response.sendRedirect("../shopping-cart");
 	}
 }

@@ -14,7 +14,7 @@
     </head>
     <body>
         <header>
-            <img src="<c:url value='../images/yellow-moon.jpg' />" width=150px height=150px class="header_image">
+            <img src="<c:url value='images/yellow-moon.jpg' />" width=150px height=150px class="header_image">
             The Yellow Moon Inn
         </header>
 

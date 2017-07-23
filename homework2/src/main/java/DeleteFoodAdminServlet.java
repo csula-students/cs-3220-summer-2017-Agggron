@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("admin/foods/delete") 
+@WebServlet("/admin/foods/delete") 
 public class DeleteFoodAdminServlet extends HttpServlet {
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

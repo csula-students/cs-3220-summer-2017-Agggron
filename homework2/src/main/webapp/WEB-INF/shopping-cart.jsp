@@ -9,12 +9,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Yellow Moon Inn: Inventory</title>
-        <link rel="stylesheet" href="<c:url value='../app.css' />">
+        <link rel="stylesheet" href="<c:url value='/app.css' />">
         <link href="<c:url value='https://fonts.googleapis.com/css?family=Ceviche+One|Cinzel:900' />" rel="stylesheet"> 
     </head>
     <body>
         <header>
-            <img src="<c:url value='../images/yellow-moon.jpg' />" width=150px height=150px class="header_image">
+            <img src="<c:url value='images/yellow-moon.jpg' />" width=150px height=150px class="header_image">
             The Yellow Moon Inn
         </header>
 

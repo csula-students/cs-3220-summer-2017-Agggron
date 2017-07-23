@@ -46,7 +46,7 @@
                     <c:forEach items="${inventory}" var="item">
                         <tr>
                             <td><p class="title">${item.getName()}</p>
-                                <img src="<c:url value='${item.imgURL}' />" class="small">
+                                <img src="<c:url value='../${item.imgURL}' />" class="small">
                                 </td>
                             <td>${item.getDescription()}</td>
                             <td>${item.getPrice()}</td>

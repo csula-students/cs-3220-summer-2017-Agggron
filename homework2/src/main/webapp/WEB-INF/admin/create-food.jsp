@@ -39,7 +39,7 @@
                 Liquor Name:<br>
                 <input type="text" name="name" value="Healing Salve"><br>
                 Liquor Image URL:<br>
-                <input type="text" name="imgURL" value="../../images/potion6.png"><br>
+                <input type="text" name="imgURL" value="images/potion6.png"><br>
                 Liquor Description:<br>
                 <input type="text" name="description" value="Useful for recovering a hearty dose of HP!"><br>
                 Liquor Price:<br>

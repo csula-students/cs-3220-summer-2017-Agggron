@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("admin/foods/create") 
+@WebServlet("/admin/foods/create") 
 public class CreateFoodAdminServlet extends HttpServlet {
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<FoodItem> inventory = (List<FoodItem>) getServletContext().getAttribute("inventory");
 		request.setAttribute("inventory", inventory);
-		request.getRequestDispatcher("../../WEB-INF/admin/create-food.jsp")
+		request.getRequestDispatcher("/WEB-INF/admin/create-food.jsp")
             .forward(request, response);
 	}
 

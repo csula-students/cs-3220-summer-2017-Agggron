@@ -31,6 +31,6 @@ public class SubmitOrderServlet extends HttpServlet {
 		getServletContext().setAttribute("orders", orders);
 		getServletContext().setAttribute("cart", cart);
 		
-		response.sendRedirect("/orders");
+		response.sendRedirect("../orders");
 	}
 }
