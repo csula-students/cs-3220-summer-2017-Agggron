@@ -32,7 +32,7 @@
 
             <p>See what liquors have caught your fancy so far!</p>
             
-            <table class="center horizontal">
+            <table class="center horizontal shopping_cart_table">
                 <thead>
                     <th>Item</th>
                     <th>Quantity</th>
@@ -55,7 +55,8 @@
                     </c:forEach> 
                     <c:if test="${cart.size() > 0}">
                         <tr>
-                            <td colspan="3"><a href="<c:url value='/shopping-cart/submit-order' />" class="button">Order Everything On Tab!</a></td>
+                            <td colspan="3"><a href="<c:url value='/shopping-cart/submit-order' />" class="button">Order Everything On Tab!</a><br>
+                            </td>
                         </tr>
                     </c:if>
                 </tbody>

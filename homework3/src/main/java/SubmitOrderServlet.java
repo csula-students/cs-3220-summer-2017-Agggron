@@ -22,7 +22,7 @@ public class SubmitOrderServlet extends HttpServlet {
 			orders.size(),
 			cart,
 			"Eric",
-			"IN_PROGRESS",
+			"IN QUEUE",
 			new Date()
 			));
 

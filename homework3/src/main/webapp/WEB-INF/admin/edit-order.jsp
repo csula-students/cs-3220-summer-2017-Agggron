@@ -32,13 +32,22 @@
             
             <h3> Editing Order for: </h3>
 
-            <p>${orderToEdit.getCustomerName()} at ${orderToEdit.getOrderTime()}</p>
+            <table class="center edit_order_table">
+                <th colspan="3"> ${orderToEdit.getCustomerName()} at ${orderToEdit.getOrderTime()} </th>
+                <c:forEach items="${orderToEdit.getItems()}" var="item">
+                    <tr>
+                        <td> ${item.getQuantity()} x </td>
+                        <td> <img src="<c:url value='../../${item.imgURL}' />" class="small"> </td>
+                        <td> ${item.getName()} </td>
+                    </tr>
+                </c:forEach> 
+             </table>
             
             <form method="post">
                 Order Status:<br>
                 <select name="new_status">
-                    <option value="IN_QUEUE">In Queue</option>
-                    <option value="IN_PROGRESS">In Progress</option>
+                    <option value="IN QUEUE">In Queue</option>
+                    <option value="IN PROGRESS">In Progress</option>
                     <option value="COMPLETED">Completed</option>
                 </select>
                 <input type="submit" value="Change Order Status!">

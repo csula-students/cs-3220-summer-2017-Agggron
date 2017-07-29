@@ -34,8 +34,8 @@
             
             <table class="center horizontal">
                 <thead>
-                    <th>Liquor Requests</th>
                     <th>Order Info</th>
+                    <th>Liquor Requests</th>
                     <th>Status</th>
                 </thead>
                 <tbody>
@@ -46,13 +46,21 @@
                     </c:if>
                     <c:forEach items="${orders}" var="order">
                         <tr>
-                            <td><ul>
-                                <c:forEach items="${order.getItems()}" var="item">
-                                    <li>${item.getQuantity()} x ${item.getName()} 
-                                </c:forEach> 
-                                </td>
-                            <td>${order.getCustomerName()}<br>
-                                ${order.getOrderTime()}</td>
+                            <td> ${order.getCustomerName()}<br>
+                                 ${order.getOrderTime()}
+                            </td>
+                            <td padding="1em">
+                                <table class="center">
+
+                                    <c:forEach items="${order.getItems()}" var="item">
+                                        <tr>
+                                            <td> ${item.getQuantity()} x </td>
+                                            <td> <img src="<c:url value='${item.imgURL}' />" class="tiny"> </td>
+                                            <td> ${item.getName()} </td>
+                                        </tr>
+                                    </c:forEach> 
+                                </table>
+                            </td>
                             <td>${order.getStatus()}</td>
                         </tr>
                     </c:forEach> 
