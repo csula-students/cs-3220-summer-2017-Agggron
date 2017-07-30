@@ -26,8 +26,7 @@ public class JDBCFoodItemListAdminServlet extends HttpServlet {
         JDBCFoodItemDAO dao = new JDBCFoodItemDAO();
 
         request.setAttribute("inventory", dao.list());
-
-        request.getRequestDispatcher("/WEB-INF/admin/inventory.jsp")
+        request.getRequestDispatcher("/WEB-INF/jdbc/admin/inventory.jsp")
             .forward(request, response);
 	}
 }
