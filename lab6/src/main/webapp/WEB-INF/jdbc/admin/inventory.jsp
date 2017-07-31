@@ -19,12 +19,12 @@
         </header>
 
         <nav>
-            <a href="<c:url value='/menu' />" class="navigation">Buy Liquor</a>
-            <a href="<c:url value='/shopping-cart' />" class="navigation">Your Tab</a>
-            <a href="<c:url value='/orders' />" class="navigation">Purchasing History</a>
-            <a href="<c:url value='/admin/foods' />" class="navigation">The Stockroom</a>
-            <a href="<c:url value='/admin/foods/create' />" class="navigation">The Brewery</a>
-            <a href="<c:url value='/admin/orders' />" class="navigation">The Chancery</a>
+            <a href="<c:url value='/jdbc/menu' />" class="navigation">Buy Liquor</a>
+            <a href="<c:url value='/jdbc/shopping-cart' />" class="navigation">Your Tab</a>
+            <a href="<c:url value='/jdbc/orders' />" class="navigation">Purchasing History</a>
+            <a href="<c:url value='/jdbc/admin/foods' />" class="navigation">The Stockroom</a>
+            <a href="<c:url value='/jdbc/admin/foods/create' />" class="navigation">The Brewery</a>
+            <a href="<c:url value='/jdbc/admin/orders' />" class="navigation">The Chancery</a>
         </nav>
 
         <main>
@@ -50,9 +50,9 @@
                                 </td>
                             <td>${item.getDescription()}</td>
                             <td>${item.getPrice()}</td>
-                            <td><a href="<c:url value='../jdbc/admin/foods/edit?id=${item.getId()}' />" class="button">Edit</a>
+                            <td><a href="<c:url value='foods/edit?id=${item.getId()}' />" class="button">Edit</a>
                                 </td>
-                            <td><a href="<c:url value='../jdbc/admin/foods/delete?id=${item.getId()}' />" class="button">Delete</a>
+                            <td><a href="<c:url value='foods/delete?id=${item.getId()}' />" class="button">Delete</a>
                                 </td>
                         </li>
                     </c:forEach> 

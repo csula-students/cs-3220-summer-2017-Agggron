@@ -8,19 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(loadOnStartup=1, urlPatterns={"jdbc/shopping-cart"})
-public class JDBCCartServlet extends HttpServlet {
+@WebServlet(loadOnStartup=1, urlPatterns={"/jdbc/orders"}) 
+public class JDBCOrderStatusesServlet extends HttpServlet {
 
 	public void init() {
-		List<JDBCFoodItem> cart = new ArrayList<>();
-		getServletContext().setAttribute("jdbc-cart", cart);
+		List<JDBCOrder> orders = new ArrayList<>();
+		getServletContext().setAttribute("jdbc-orders", orders);
 	}
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<JDBCFoodItem> cart = (List<JDBCFoodItem>) getServletContext().getAttribute("jdbc-cart");
-		request.setAttribute("cart", cart);
-		
-		request.getRequestDispatcher("/WEB-INF/jdbc/shopping-cart.jsp")
+		List<JDBCOrder> orders = (List<JDBCOrder>) getServletContext().getAttribute("jdbc-orders");
+
+		request.setAttribute("orders", orders);
+		request.getRequestDispatcher("/WEB-INF/jdbc/orders.jsp")
 			.forward(request, response);
 	}
 }

@@ -9,7 +9,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Yellow Moon Inn: Inventory</title>
-        <link rel="stylesheet" href="<c:url value='../app.css' />">
+        <link rel="stylesheet" href="<c:url value='/app.css' />">
         <link href="<c:url value='https://fonts.googleapis.com/css?family=Ceviche+One|Cinzel:900' />" rel="stylesheet"> 
     </head>
     <body>
@@ -19,12 +19,12 @@
         </header>
 
         <nav>
-            <a href="<c:url value='/menu' />" class="navigation">Buy Liquor</a>
-            <a href="<c:url value='/shopping-cart' />" class="navigation">Your Tab</a>
-            <a href="<c:url value='/orders' />" class="navigation">Purchasing History</a>
-            <a href="<c:url value='/admin/foods' />" class="navigation">The Stockroom</a>
-            <a href="<c:url value='/admin/foods/create' />" class="navigation">The Brewery</a>
-            <a href="<c:url value='/admin/orders' />" class="navigation">The Chancery</a>
+            <a href="<c:url value='/jdbc/menu' />" class="navigation">Buy Liquor</a>
+            <a href="<c:url value='/jdbc/shopping-cart' />" class="navigation">Your Tab</a>
+            <a href="<c:url value='/jdbc/orders' />" class="navigation">Purchasing History</a>
+            <a href="<c:url value='/jdbc/admin/foods' />" class="navigation">The Stockroom</a>
+            <a href="<c:url value='/jdbc/admin/foods/create' />" class="navigation">The Brewery</a>
+            <a href="<c:url value='/jdbc/admin/orders' />" class="navigation">The Chancery</a>
         </nav>
 
         <main>
@@ -50,12 +50,12 @@
                                 <img src="<c:url value='../${item.imgURL}' />" class="small">
                                 </td>
                             <td>${item.getQuantity()}</td>
-                            <td><a href="<c:url value='/shopping-cart/remove?id=${item.getId()}' />" class="button">Remove From Tab!</a>    </td>
+                            <td><a href="<c:url value='shopping-cart/remove?id=${item.getId()}' />" class="button">Remove From Tab!</a>    </td>
                         </tr>
                     </c:forEach> 
                     <c:if test="${cart.size() > 0}">
                         <tr>
-                            <td colspan="3"><a href="<c:url value='/shopping-cart/submit-order' />" class="button">Order Everything On Tab!</a><br>
+                            <td colspan="3"><a href="<c:url value='shopping-cart/submit-order' />" class="button">Order Everything On Tab!</a><br>
                             </td>
                         </tr>
                     </c:if>

@@ -17,19 +17,19 @@
     </head>
     <body>
         <header>
-            <img src="<c:url value='../images/yellow-moon.jpg' />" width=150px height=150px class="header_image">
+            <img src="<c:url value='../../images/yellow-moon.jpg' />" width=150px height=150px class="header_image">
             The Yellow Moon Inn
         </header>
 
         <%-- <cs3220:header /> --%>
 
         <nav>
-            <a href="<c:url value='/menu' />" class="navigation">Buy Liquor</a>
-            <a href="<c:url value='/shopping-cart' />" class="navigation">Your Tab</a>
-            <a href="<c:url value='/orders' />" class="navigation">Purchasing History</a>
-            <a href="<c:url value='/admin/foods' />" class="navigation">The Stockroom</a>
-            <a href="<c:url value='/admin/foods/create' />" class="navigation">The Brewery</a>
-            <a href="<c:url value='/admin/orders' />" class="navigation">The Chancery</a>
+            <a href="<c:url value='/jdbc/menu' />" class="navigation">Buy Liquor</a>
+            <a href="<c:url value='/jdbc/shopping-cart' />" class="navigation">Your Tab</a>
+            <a href="<c:url value='/jdbc/orders' />" class="navigation">Purchasing History</a>
+            <a href="<c:url value='/jdbc/admin/foods' />" class="navigation">The Stockroom</a>
+            <a href="<c:url value='/jdbc/admin/foods/create' />" class="navigation">The Brewery</a>
+            <a href="<c:url value='/jdbc/admin/orders' />" class="navigation">The Chancery</a>
         </nav>
 
         <main>
@@ -64,7 +64,7 @@
                                     <c:forEach items="${order.getItems()}" var="item">
                                         <tr>
                                             <td> ${item.getQuantity()} x </td>
-                                            <td> <img src="<c:url value='../${item.imgURL}' />" class="tiny"> </td>
+                                            <td> <img src="<c:url value='../../${item.imgURL}' />" class="tiny"> </td>
                                             <td> ${item.getName()} </td>
                                         </tr>
                                     </c:forEach> 
@@ -72,9 +72,9 @@
                             </td>
 
                             <td>${order.getStatus()}</td>
-                            <td><a href="<c:url value='../admin/orders/edit?id=${order.getId()}' />" class="button">Edit Status</a>
+                            <td><a href="<c:url value='orders/edit?id=${order.getId()}' />" class="button">Edit Status</a>
                                 </td>
-                            <td><a href="<c:url value='../admin/orders/delete?id=${order.getId()}' />" class="button">Delete</a>
+                            <td><a href="<c:url value='orders/delete?id=${order.getId()}' />" class="button">Delete</a>
                                 </td>
                         </tr>
                     </c:forEach> 
