@@ -7,7 +7,7 @@ import java.sql.Statement;
 public class Database {
     public static final String database = "cs3220xstu19";
     public static final String url = "jdbc:mysql://localhost/" + database;
-    public static final String username = "cs3320xstu19";
+    public static final String username = "cs3220xstu19";
     public static final String password = "UFB!s!y.";
 
     public Database() {
