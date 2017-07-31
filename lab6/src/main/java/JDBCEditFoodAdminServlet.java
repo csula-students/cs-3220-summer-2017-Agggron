@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("jdbc/admin/foods/edit") 
+@WebServlet("/jdbc/admin/foods/edit") 
 public class JDBCEditFoodAdminServlet extends HttpServlet {
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

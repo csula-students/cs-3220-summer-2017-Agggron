@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(loadOnStartup=1, urlPatterns={"jdbc/shopping-cart"})
+@WebServlet(loadOnStartup=1, urlPatterns={"/jdbc/shopping-cart"})
 public class JDBCCartServlet extends HttpServlet {
 
 	public void init() {
