@@ -124,7 +124,7 @@ public class RandomRestaurantServlet extends HttpServlet {
 
 		else if (request.getParameter("restaurant_list") != null) {
 			// go to the list of restaurants servlet page
-			response.sendRedirect("/suggest/restaurants/random/list");
+			response.sendRedirect("cs3220xstu19/suggest/restaurants/random/list");
 		} 
 
 }
