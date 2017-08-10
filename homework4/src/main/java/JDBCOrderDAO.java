@@ -18,7 +18,7 @@ public class JDBCOrderDAO implements DAO<JDBCOrder> {
 
             // Get information from orders table
             Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from orders INNER JOIN order_foods INNER JOIN menu WHERE orders.order_id = order_foods.order_foods_id AND menu.id = order_foods.menu_id;");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM orders INNER JOIN order_foods INNER JOIN menu WHERE orders.order_id = order_foods.order_foods_id AND menu.id = order_foods.menu_id;");
             while (rs.next()) {
                 int order_id = rs.getInt("order_id");
 
@@ -66,7 +66,48 @@ public class JDBCOrderDAO implements DAO<JDBCOrder> {
     }
 
     public Optional<JDBCOrder> get(int id) {
-        return null;
+        Optional<JDBCOrder> toReturn = Optional.empty();
+        Database db = new Database();
+        try (Connection c = db.connection()) {
+            PreparedStatement pstmt = c.prepareStatement("SELECT * FROM orders INNER JOIN order_foods INNER JOIN menu WHERE orders.order_id = ? AND order_foods.order_foods_id = ? AND order_foods.menu_id = menu.id");
+            pstmt.setInt(1, id);
+            pstmt.setInt(2, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            boolean createdNewOrder = false;
+            JDBCOrder newOrder = null;
+            if (rs.next()) {
+                
+                JDBCFoodItem foodItemToAdd = new JDBCFoodItem(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getString("description"),
+                    rs.getString("imgURL"), 
+                    (double) rs.getFloat("price")
+                );
+                foodItemToAdd.quantity = rs.getInt("food_quantity");
+
+                if (!createdNewOrder) {
+                    List<JDBCFoodItem> listOfFoodItemsInOrder = new ArrayList<JDBCFoodItem>();
+                    listOfFoodItemsInOrder.add(foodItemToAdd);
+                    newOrder = new JDBCOrder(rs.getInt("order_id"),
+                                            listOfFoodItemsInOrder,
+                                            rs.getString("customer_name"),
+                                            rs.getString("status"),
+                                            rs.getTimestamp("order_time")
+                                            );
+                    createdNewOrder = true;
+                } else {
+                    newOrder.items.add(foodItemToAdd);
+                }
+
+                toReturn = Optional.of(newOrder);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return toReturn;
     }
 
     public void add(JDBCOrder order) {

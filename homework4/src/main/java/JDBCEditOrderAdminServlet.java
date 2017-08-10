@@ -14,14 +14,17 @@ public class JDBCEditOrderAdminServlet extends HttpServlet {
 	public void doGet( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int id = Integer.parseInt(request.getParameter("id"));
-		List<JDBCOrder> orders = (List<JDBCOrder>) getServletContext().getAttribute("jdbc-orders");
+		/*List<JDBCOrder> orders = (List<JDBCOrder>) getServletContext().getAttribute("jdbc-orders");
 
 		JDBCOrder orderToEdit = null;
 		for (JDBCOrder order : orders) {
 			if (order.getId() == id) {
 				orderToEdit = order;
 			}
-		}
+		}*/
+
+		JDBCOrderDAO dao = new JDBCOrderDAO();
+		JDBCOrder orderToEdit = dao.get(id).get();
 
 		request.setAttribute("orderToEdit", orderToEdit);
 		request.getRequestDispatcher("/WEB-INF/jdbc/admin/edit-order.jsp")
