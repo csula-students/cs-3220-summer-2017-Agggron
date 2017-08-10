@@ -8,11 +8,11 @@ public class JDBCOrder {
 		IN_QUEUE, IN_PROGRESS, COMPLETED
 	}
 
-	public final int id;
-	public final List<JDBCFoodItem> items;
-	public final String customerName;
+	public int id;
+	public List<JDBCFoodItem> items;
+	public String customerName;
 	public String status;
-	public final Date orderTime;
+	public Date orderTime;
 
 	public JDBCOrder (int id, List<JDBCFoodItem> items, String customerName, String status, Date orderTime) {
 		this.id = id;

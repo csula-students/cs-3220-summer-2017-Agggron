@@ -13,8 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 public class JDBCOrderStatusesAdminServlet extends HttpServlet {
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<JDBCOrder> orders = (List<JDBCOrder>) getServletContext().getAttribute("jdbc-orders");
-		request.setAttribute("orders", orders);
+		// List<JDBCOrder> orders = (List<JDBCOrder>) getServletContext().getAttribute("jdbc-orders");
+		// request.setAttribute("orders", orders);
+		
+		JDBCOrderDAO dao = new JDBCOrderDAO();
+		request.setAttribute("orders", dao.list());
+		
 		request.getRequestDispatcher("/WEB-INF/jdbc/admin/order-statuses.jsp")
             .forward(request, response);
 	}

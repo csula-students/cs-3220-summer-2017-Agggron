@@ -14,7 +14,7 @@ public class JDBCSubmitOrderServlet extends HttpServlet {
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<JDBCFoodItem> cart = (List<JDBCFoodItem>) getServletContext().getAttribute("jdbc-cart");
-		List<JDBCOrder> orders = (List<JDBCOrder>) getServletContext().getAttribute("jdbc-orders");
+		/*List<JDBCOrder> orders = (List<JDBCOrder>) getServletContext().getAttribute("jdbc-orders");
 
 		orders.add(new JDBCOrder(
 			orders.size(),
@@ -24,9 +24,20 @@ public class JDBCSubmitOrderServlet extends HttpServlet {
 			new Date()
 			));
 
+		getServletContext().setAttribute("jdbc-orders", orders);
+			*/
+
+		JDBCOrderDAO dao = new JDBCOrderDAO();
+		dao.add(new JDBCOrder(
+			dao.getNextAvailableOrderId(),
+			cart,
+			"Eric", 
+			"IN QUEUE", 
+			new Date()
+			));
+
 		cart = new ArrayList<>();
 
-		getServletContext().setAttribute("jdbc-orders", orders);
 		getServletContext().setAttribute("jdbc-cart", cart);
 		
 		response.sendRedirect("../orders");
