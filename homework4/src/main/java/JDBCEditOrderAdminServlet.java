@@ -36,7 +36,7 @@ public class JDBCEditOrderAdminServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
-		List<JDBCOrder> orders = (List<JDBCOrder>) getServletContext().getAttribute("jdbc-orders");
+		/*List<JDBCOrder> orders = (List<JDBCOrder>) getServletContext().getAttribute("jdbc-orders");
 		
 		JDBCOrder orderToEdit = null;
 		int index = -1;
@@ -55,7 +55,18 @@ public class JDBCEditOrderAdminServlet extends HttpServlet {
 			orderToEdit.getOrderTime()
 		));
 
-		getServletContext().setAttribute("jdbc-orders", orders);
+		getServletContext().setAttribute("jdbc-orders", orders);*/
+
+		JDBCOrderDAO dao = new JDBCOrderDAO();
+
+		JDBCOrder orderToUpdate = new JDBCOrder(
+												dao.get(id).get().getId(),
+												dao.get(id).get().getItems(),
+												dao.get(id).get().getCustomerName(),
+												request.getParameter("new_status"),
+												dao.get(id).get().getOrderTime()
+												);
+		dao.update(orderToUpdate);
 
 		response.sendRedirect("../orders");
 	}

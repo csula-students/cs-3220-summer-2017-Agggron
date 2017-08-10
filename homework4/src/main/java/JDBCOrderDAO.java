@@ -157,7 +157,18 @@ public class JDBCOrderDAO implements DAO<JDBCOrder> {
     }
 
     public void update(JDBCOrder order) {
-        return;
+        Database db = new Database();
+        try (Connection c = db.connection()) {
+            PreparedStatement pstmt = c.prepareStatement("UPDATE orders SET order_id = ?, customer_name = ?, status = ?, order_time = ? WHERE order_id = ?");
+            pstmt.setInt(1, order.getId());
+            pstmt.setString(2, order.getCustomerName());
+            pstmt.setString(3, order.getStatus());
+            pstmt.setTimestamp(4, getSQLDate(order.getOrderTime()));
+            pstmt.setInt(5, order.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void delete(int id) {
@@ -167,7 +178,7 @@ public class JDBCOrderDAO implements DAO<JDBCOrder> {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
 
-            pstmt = c.prepareStatement("DELETE FROM order_foods WHERE orders.order_foods_id = ? ");
+            pstmt = c.prepareStatement("DELETE FROM order_foods WHERE order_foods.order_foods_id = ? ");
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
         } catch (SQLException e) {
