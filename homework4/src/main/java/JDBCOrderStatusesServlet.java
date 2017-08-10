@@ -14,12 +14,16 @@ public class JDBCOrderStatusesServlet extends HttpServlet {
 	public void init() {
 		List<JDBCOrder> orders = new ArrayList<>();
 		getServletContext().setAttribute("jdbc-orders", orders);
+
 	}
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<JDBCOrder> orders = (List<JDBCOrder>) getServletContext().getAttribute("jdbc-orders");
+		//List<JDBCOrder> orders = (List<JDBCOrder>) getServletContext().getAttribute("jdbc-orders");
 
-		request.setAttribute("orders", orders);
+		JDBCOrderDAO dao = new JDBCOrderDAO();
+		request.setAttribute("orders", dao.list());
+
+		//request.setAttribute("orders", orders);
 		request.getRequestDispatcher("/WEB-INF/jdbc/orders.jsp")
 			.forward(request, response);
 	}

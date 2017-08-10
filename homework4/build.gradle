@@ -28,6 +28,12 @@ dependencies {
     compile group: 'javax.servlet.jsp', name: 'javax.servlet.jsp-api', version: '2.3.1'
     // MySQL JDBC
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.43'
+    // JAX-RS -- Jersey
+    compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0.1'
+    // JAX-RS -- Jersey Servlet
+    compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet', version: '2.25'
+    // JAX-RS -- Jersey Jackson
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.25.1'
 
     // Declare the dependency for your favourite test framework you want to use in your tests.
     // TestNG is also supported by the Gradle Test task. Just change the

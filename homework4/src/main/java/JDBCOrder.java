@@ -9,10 +9,10 @@ public class JDBCOrder {
 	}
 
 	public final int id;
-	public final List<JDBCFoodItem> items;
-	public final String customerName;
+	public List<JDBCFoodItem> items;
+	public String customerName;
 	public String status;
-	public final Date orderTime;
+	public Date orderTime;
 
 	public JDBCOrder (int id, List<JDBCFoodItem> items, String customerName, String status, Date orderTime) {
 		this.id = id;
