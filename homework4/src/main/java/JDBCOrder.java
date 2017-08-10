@@ -8,7 +8,7 @@ public class JDBCOrder {
 		IN_QUEUE, IN_PROGRESS, COMPLETED
 	}
 
-	public final int id;
+	public int id;
 	public List<JDBCFoodItem> items;
 	public String customerName;
 	public String status;

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class JDBCOrderDAO implements DAO<JDBCOrder> {
+
     public List<JDBCOrder> list() {
         List<JDBCOrder> list = new ArrayList<>();
         List<Integer> order_ids_added = new ArrayList<>();
@@ -94,6 +95,22 @@ public class JDBCOrderDAO implements DAO<JDBCOrder> {
         }
     }
 
+    public int getNextAvailableOrderId() {
+        Database db = new Database();
+        int highest_id_so_far = 1;
+        try (Connection c = db.connection()) {
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT max(order_id) FROM orders;");
+            while (rs.next()) {
+                highest_id_so_far = rs.getInt("max(order_id)");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println(highest_id_so_far);
+        return highest_id_so_far + 1;
+    }
+
     private static java.sql.Timestamp getSQLDate(java.util.Date date) {
         return new java.sql.Timestamp(date.getTime());
     }
@@ -103,6 +120,17 @@ public class JDBCOrderDAO implements DAO<JDBCOrder> {
     }
 
     public void delete(int id) {
-        return;
+        Database db = new Database();
+        try (Connection c = db.connection()) {
+            PreparedStatement pstmt = c.prepareStatement("DELETE FROM orders WHERE orders.order_id = ? ");
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+
+            pstmt = c.prepareStatement("DELETE FROM order_foods WHERE orders.order_foods_id = ? ");
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

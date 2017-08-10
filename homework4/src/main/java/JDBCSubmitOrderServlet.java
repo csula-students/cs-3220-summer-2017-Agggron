@@ -29,7 +29,7 @@ public class JDBCSubmitOrderServlet extends HttpServlet {
 
 		JDBCOrderDAO dao = new JDBCOrderDAO();
 		dao.add(new JDBCOrder(
-			dao.list().size() + 1,
+			dao.getNextAvailableOrderId(),
 			cart,
 			"Eric", 
 			"IN QUEUE", 
