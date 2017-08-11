@@ -1,0 +1,171 @@
+body {
+	background-color: black;
+	color: white;
+}
+
+header {
+	color: yellow;
+	font-size: 36px;
+	font-family: 'Cinzel', serif;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+.header_image {
+	align-self: flex-start;
+}
+nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	background-color: yellow;
+	border-radius: 20px;
+	padding: 0.5em;
+}
+.navigation {
+	color: black;
+	font-size: 26px;
+	font-family: 'Ceviche One', cursive;
+	text-decoration: none;
+}
+.navigation:hover {
+	color: gray;
+}
+.navigation-selected {
+	background-color: black;
+	color: yellow;
+	font-size: 26px;
+	font-family: 'Ceviche One', cursive;
+	text-decoration: none;
+}
+.navigation-selected:hover {
+	color: white;
+}
+.button {
+	background-color: yellow;
+	border-radius: 20px;
+	padding: 0.5em;
+	color: black;
+	font-size: 26px;
+	font-family: 'Ceviche One', cursive;
+	text-decoration: none;
+}
+.button:hover {
+	color: gray;
+}
+
+main {
+	font-family: 'Calibri';
+	font-size: 20px;
+	padding: 0.5em;
+	color: white;
+}
+h2 {
+	font-size: 28px;
+	text-align: center;
+	text-transform: uppercase;
+}
+h3 {
+	font-size: 24px;
+	text-transform: uppercase;
+	font-size: bold;
+}
+h4 {
+
+}
+h5 {
+	font-size: 24px;
+	text-transform: uppercase;
+	font-size: bold;
+}
+
+
+table {
+	border-collapse: collapse;
+}
+th {
+	font-size: 24px;
+	font-style: bold;
+	text-transform: uppercase;
+	border-top: 3px solid white;
+	border-bottom: 3px solid white;
+	padding: 0.5em;
+}
+td {
+	padding: 0.5em;
+	text-align: center;
+	vertical-align: center;
+	width: 10%;
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+img.center {
+	display: flex;
+	justify-content: center;
+}
+.horizontal {
+	border-top: 3px solid white;
+	border-bottom: 3px solid white;
+	border-left: 0px;
+	border-right: 0px;
+	min-width: 50%;
+}
+.shopping_cart_table {
+	max-width: 75%;
+	min-width: 75%;
+}
+.edit_order_table {
+	max-width: 50%;
+	min-width: 50%;
+}
+.roll_dice_table {
+	max-width: 50%;
+	min-width: 50%;
+}
+.four-column {
+	max-width: 20%;
+	min-width: 20%;
+}
+.six-column {
+	max-width: 15%;
+	min-width: 15%;
+}
+.bold {
+	font-style: bold;
+}
+.italics {
+	font-style: italic;
+}
+.underline {
+	text-decoration: underline;
+}
+.title {
+	text-transform: uppercase;
+	font-style: bold;
+}
+.tiny {
+	width: 40px;
+	height: 40px;
+}
+.small {
+	width: 75px;
+	height: 75px;
+}
+.medium {
+	width: 150px;
+	height: 150px;
+}
+.tarot_cards {
+	width: 150px;
+	height: 300px;
+}
+.text-center {
+	text-align: center;
+}
+
+footer {
+	padding: 0.5em;
+}
