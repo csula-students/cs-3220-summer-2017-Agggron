@@ -60,12 +60,13 @@ public class FoodItemDAO implements DAOResource<FoodItem> {
     public void add(FoodItem entry) {
         DatabaseResource db = new DatabaseResource();
         try (Connection c = db.connection()) {
-            PreparedStatement pstmt = c.prepareStatement("INSERT INTO menu (id, name, description, imgURL, price) VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement pstmt = c.prepareStatement("INSERT INTO menu (id, name, description, imgURL, price, quantity) VALUES (?, ?, ?, ?, ?, ?)");
             pstmt.setInt(1, entry.getId());
             pstmt.setString(2, entry.getName());
             pstmt.setString(3, entry.getDescription());
             pstmt.setString(4, entry.getImgURL());
             pstmt.setFloat(5, (float) entry.getPrice());
+            pstmt.setInt(6, entry.getQuantity());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

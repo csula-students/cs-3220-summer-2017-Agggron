@@ -27,7 +27,7 @@ public class FoodResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String sayHello() {
-        return "test";
+        return "Try /services/fooditems with a GET OR POST request, or /services/fooditem/:id with a GET, PUT, or DELETE request!";
         /*"GET    /services/fooditems     return a list of food items in the database
         GET     /services/fooditem/:id  return a single food items given by id in the database
         POST    /services/fooditems     Create a new food item and add it to database
@@ -35,12 +35,6 @@ public class FoodResource {
         DELETE  /services/fooditem/:id  Delete a food item given id";*/
     }
 
-    @GET
-    @Path("users")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<User> getUser() {
-        return users;
-    }
 
     @GET
     @Path("fooditems")
@@ -71,10 +65,13 @@ public class FoodResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public boolean updateFoodItem(FoodItem foodItem, @PathParam("id") int id) {
-        /*FoodItem foodItemToUpdate = dao.get(id).get();
-        dao.update(foodItem);
-        System.out.println(dao.list());*/
-        return true;
+        if (id == foodItem.getId()) {
+            dao.update(foodItem);
+            System.out.println(dao.list());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @DELETE
@@ -83,18 +80,6 @@ public class FoodResource {
     public boolean deleteFoodItem(@PathParam("id") int id) {
         dao.delete(id);
         System.out.println(dao.list());
-        return true;
-    }
-
-
-    @POST
-    @Path("users")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public boolean addUser(User newUser) {
-        System.out.println(newUser);
-        users.add(newUser);
-        System.out.println(users);
         return true;
     }
 }

@@ -8,13 +8,14 @@ public class FoodItem {
 	public final double price;
 	public int quantity;
 
+	// solo constructor (without arguments) needed for the JAXRS POST request, which converts JSON into a FoodItem object (presumably it has to use a solo constructor?)
 	public FoodItem() {
 		this.id = 0;
 		this.name = "";
 		this.description = "";
 		this.imgURL = "";
 		this.price = 0;
-		this.quantity = 0;
+		this.quantity = 1;
 	}
 	public FoodItem (int id, String name, String description, String imgURL, double price) {
 		this.id = id;
