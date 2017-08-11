@@ -15,52 +15,53 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import jaxrs.models.Order;
 import jaxrs.models.FoodItem;
 
 @Path("")
 @Singleton // used to keep resource between requests otherwise request cope
-public class FoodResource {
-    private FoodItemDAO dao = new FoodItemDAO();
-
-    /* Try /services/fooditems with a GET OR POST request, or /services/fooditem/:id with a GET, PUT, or DELETE request! */
+public class OrderResource {
+    private OrderDAO dao = new OrderDAO();
+   
+    /* Try /services/orders with a GET OR POST request, or /services/order/:id with a GET, PUT, or DELETE request! */
 
     @GET
-    @Path("fooditems")
+    @Path("orders")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<FoodItem> getMenu() {
+    public List<Order> getOrders() {
         return dao.list();
     }
 
     @GET
-    @Path("fooditem/{id}")
+    @Path("order/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public FoodItem getFoodItemById(@PathParam("id") int id) {
+    public Order getOrderById(@PathParam("id") int id) {
         return dao.get(id).get();
     }
 
     @POST
-    @Path("fooditems")
+    @Path("orders")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    /* EXAMPLE TO PUT IN:
-    {   "id": 6,
-        "name": "Healing Salve",
-        "description": "Restores HP!",
-        "imgURL": "images/potion6.png",
-        "price": 1.5
-    } */
-    public boolean addFoodItem(FoodItem foodItem) {
-        dao.add(foodItem);
+    /* EXAMPLE TO PUT IN BODY:
+    {   "id":3,
+        "items":[{"id":2,"name":"Dragon Breath Ale","description":"Test","imgURL":"images/potion2.png","price":8.0,"quantity":666}],
+        "customerName":"Aaron",
+        "status":"IN QUEUE",
+        "orderTime":1502431895000
+    }*/
+   public boolean addOrder(Order order) {
+        dao.add(order);
         return true;
     }
 
     @PUT
-    @Path("fooditem/{id}")
+    @Path("order/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public boolean updateFoodItem(FoodItem foodItem, @PathParam("id") int id) {
-        if (id == foodItem.getId()) {
-            dao.update(foodItem);
+    public boolean updateOrder(Order order, @PathParam("id") int id) {
+        if (id == order.getId()) {
+            dao.update(order);
             return true;
         } else {
             return false;
@@ -68,9 +69,9 @@ public class FoodResource {
     }
 
     @DELETE
-    @Path("fooditem/{id}")
+    @Path("order/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public boolean deleteFoodItem(@PathParam("id") int id) {
+    public boolean deleteOrder(@PathParam("id") int id) {
         dao.delete(id);
         return true;
     }
