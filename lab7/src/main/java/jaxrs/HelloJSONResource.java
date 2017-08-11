@@ -13,11 +13,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import jaxrs.models.User;
+import jaxrs.models.FoodItem;
 
 @Path("hello-json-resource")
 @Singleton // used to keep resource between requests otherwise request cope
 public class HelloJSONResource {
     private List<User> users = new ArrayList<>(Arrays.asList(new User("Eric", "Liao")));
+    private FoodItemDAO dao = new FoodItemDAO();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -30,6 +32,13 @@ public class HelloJSONResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<User> getUser() {
         return users;
+    }
+
+    @GET
+    @Path("menu")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<FoodItem> getMenu() {
+        return dao.list();
     }
 
     @POST
