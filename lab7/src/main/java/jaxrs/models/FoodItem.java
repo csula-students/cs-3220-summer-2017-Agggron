@@ -8,6 +8,14 @@ public class FoodItem {
 	public final double price;
 	public int quantity;
 
+	public FoodItem() {
+		this.id = 0;
+		this.name = "";
+		this.description = "";
+		this.imgURL = "";
+		this.price = 0;
+		this.quantity = 0;
+	}
 	public FoodItem (int id, String name, String description, String imgURL, double price) {
 		this.id = id;
 		this.name = name;
